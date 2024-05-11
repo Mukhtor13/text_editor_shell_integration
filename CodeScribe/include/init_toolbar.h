@@ -169,8 +169,8 @@ GtkWidget *create_toolbar(WindowDependecies *win_dep, MetaData *meta_data)
     g_signal_connect(G_OBJECT(zoomOutTb), "clicked",
                      G_CALLBACK(zoom_out_callback), meta_data);
 
-    g_signal_connect(G_OBJECT(aboutTb), "clicked",
-                     G_CALLBACK(about_callback), (gpointer)win_dep->window);
+    // g_signal_connect(G_OBJECT(aboutTb), "clicked",
+    //                  G_CALLBACK(about_callback), (gpointer)win_dep->window);
 
     g_signal_connect(G_OBJECT(exitTb), "clicked",
                      G_CALLBACK(gtk_main_quit), NULL);

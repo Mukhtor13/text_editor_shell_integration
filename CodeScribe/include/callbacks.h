@@ -1019,17 +1019,17 @@ void compile_and_run_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     }
 }
 
-void about_callback(GtkMenuItem *menu_item, GtkWindow *parent_window)
-{
-    const char *authors[] = {"Farididdin Rakhimov", NULL};
+// void about_callback(GtkMenuItem *menu_item, GtkWindow *parent_window)
+// {
+//     const char *authors[] = {"Farididdin Rakhimov", NULL};
 
-    gtk_show_about_dialog(parent_window,
-                          "program-name", "Code Scribe",
-                          "authors", authors,
-                          "license", "GNU General Public License",
-                          "comments", "A GTK+ based code editor with online codebase",
-                          NULL);
-}
+//     gtk_show_about_dialog(parent_window,
+//                           "program-name", "Code Scribe",
+//                           "authors", authors,
+//                           "license", "GNU General Public License",
+//                           "comments", "A GTK+ based code editor with online codebase",
+//                           NULL);
+// }
 
 void update_statusbar_col_lines(GtkSourceBuffer *buffer, GtkStatusbar *statusbar)
 {

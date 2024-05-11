@@ -589,35 +589,35 @@ void *create_build_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaDa
     menubar_obj->build_menu->compile_and_run_mi = compile_and_run_mi;
 }
 
-void *create_help_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data)
-{
-    GtkWidget *help_menu;
-    GtkWidget *help_mi;
-    GtkWidget *about_mi;
-    GtkWidget *docs_mi;
-    GtkWidget *sep;
+// void *create_help_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data)
+// {
+//     GtkWidget *help_menu;
+//     GtkWidget *help_mi;
+//     GtkWidget *about_mi;
+//     GtkWidget *docs_mi;
+//     GtkWidget *sep;
 
-    help_menu = gtk_menu_new();
+//     help_menu = gtk_menu_new();
 
-    help_mi = gtk_menu_item_new_with_mnemonic("_Help");
-    about_mi = gtk_menu_item_new_with_label("About");
-    docs_mi = gtk_menu_item_new_with_label("Documentation");
-    sep = gtk_separator_menu_item_new();
+//     help_mi = gtk_menu_item_new_with_mnemonic("_Help");
+//     about_mi = gtk_menu_item_new_with_label("About");
+//     docs_mi = gtk_menu_item_new_with_label("Documentation");
+//     sep = gtk_separator_menu_item_new();
 
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(help_mi), help_menu);
-    gtk_menu_shell_append(GTK_MENU_SHELL(help_menu), docs_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(help_menu), sep);
-    gtk_menu_shell_append(GTK_MENU_SHELL(help_menu), about_mi);
+//     gtk_menu_item_set_submenu(GTK_MENU_ITEM(help_mi), help_menu);
+//     gtk_menu_shell_append(GTK_MENU_SHELL(help_menu), docs_mi);
+//     gtk_menu_shell_append(GTK_MENU_SHELL(help_menu), sep);
+//     gtk_menu_shell_append(GTK_MENU_SHELL(help_menu), about_mi);
 
-    g_signal_connect(G_OBJECT(about_mi), "activate", G_CALLBACK(about_callback), win_dep->window);
-    g_signal_connect(G_OBJECT(docs_mi), "activate", G_CALLBACK(docs_callback), meta_data);
+//     g_signal_connect(G_OBJECT(about_mi), "activate", G_CALLBACK(about_callback), win_dep->window);
+//     g_signal_connect(G_OBJECT(docs_mi), "activate", G_CALLBACK(docs_callback), meta_data);
 
-    menubar_obj->help_menu->help_menu = help_menu;
-    menubar_obj->help_menu->help_mi = help_mi;
-    menubar_obj->help_menu->docs_mi = docs_mi;
-    menubar_obj->help_menu->sep = sep;
-    menubar_obj->help_menu->about_mi = about_mi;
-}
+//     menubar_obj->help_menu->help_menu = help_menu;
+//     menubar_obj->help_menu->help_mi = help_mi;
+//     menubar_obj->help_menu->docs_mi = docs_mi;
+//     menubar_obj->help_menu->sep = sep;
+//     menubar_obj->help_menu->about_mi = about_mi;
+// }
 
 GtkWidget *create_menubar(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data)
 {
@@ -629,14 +629,14 @@ GtkWidget *create_menubar(WindowDependecies *win_dep, MenuBar *menubar_obj, Meta
     create_format_menu(win_dep, menubar_obj, meta_data);
     create_search_menu(win_dep, menubar_obj, meta_data);
     create_build_menu(win_dep, menubar_obj, meta_data);
-    create_help_menu(win_dep, menubar_obj, meta_data);
+    // create_help_menu(win_dep, menubar_obj, meta_data);
 
     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), menubar_obj->file_menu->file_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), menubar_obj->edit_menu->edit_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), menubar_obj->format_menu->format_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), menubar_obj->search_menu->search_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), menubar_obj->build_menu->build_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menubar), menubar_obj->help_menu->help_mi);
+    // gtk_menu_shell_append(GTK_MENU_SHELL(menubar), menubar_obj->help_menu->help_mi);
 
     return menubar;
 }

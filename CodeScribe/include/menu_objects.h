@@ -87,14 +87,14 @@ typedef struct
     GtkWidget *compile_and_run_mi; // Gtk::MenuItem
 } BuildMenu;                       // Build Menu
 
-typedef struct
-{
-    GtkWidget *help_menu; // Gtk::Menu
-    GtkWidget *help_mi;   // Gtk::MenuItem
-    GtkWidget *about_mi;  // Gtk::MenuItem
-    GtkWidget *docs_mi;   // Gtk::MenuItem
-    GtkWidget *sep;       // Gtk::MenuItem
-} HelpMenu;               // Help Menu
+// typedef struct
+// {
+//     GtkWidget *help_menu; // Gtk::Menu
+//     GtkWidget *help_mi;   // Gtk::MenuItem
+//     GtkWidget *about_mi;  // Gtk::MenuItem
+//     GtkWidget *docs_mi;   // Gtk::MenuItem
+//     GtkWidget *sep;       // Gtk::MenuItem
+// } HelpMenu;               // Help Menu
 
 typedef struct
 {
@@ -103,7 +103,7 @@ typedef struct
     FormatMenu *format_menu;
     SearchMenu *search_menu;
     BuildMenu *build_menu;
-    HelpMenu *help_menu;
+    // HelpMenu *help_menu;
 } MenuBar;
 
 typedef struct
