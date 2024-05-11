@@ -58,9 +58,9 @@ typedef struct
     GtkWidget *format_menu;
     GtkWidget *format_mi;
     GtkWidget *auto_indent_mi;
-    GtkWidget *space_tabs_mi;
+    // GtkWidget *space_tabs_mi;
     GtkWidget *line_numbers_mi;
-    GtkWidget *visualize_spaces_mi;
+    // GtkWidget *visualize_spaces_mi;
     GtkWidget *wrap_words_mi;
     GtkWidget *tab_width_head_mi;
     // GtkWidget* justify_left_mi;
@@ -139,9 +139,9 @@ typedef struct
 
     GtkJustification justify;
     gboolean auto_indent;
-    gboolean space_tabs;
+    // gboolean space_tabs;
     gboolean line_numbers;
-    gboolean visualize_spaces;
+    // gboolean visualize_spaces;
     gboolean highlight_line;
     GtkWrapMode wrap_mode;
 

@@ -15,12 +15,12 @@
 #include "menu_objects.h"
 #include "WindowDependecies.h"
 
-SourceObject* create_source(MetaData *meta_data)
+SourceObject *create_source(MetaData *meta_data)
 {
-    SourceObject* source_object;
-    GtkSourceBuffer* buffer;
+    SourceObject *source_object;
+    GtkSourceBuffer *buffer;
 
-    if(meta_data->lang_manager==NULL)
+    if (meta_data->lang_manager == NULL)
     {
         meta_data->lang_manager = gtk_source_language_manager_new();
         meta_data->lang = gtk_source_language_manager_get_language(GTK_SOURCE_LANGUAGE_MANAGER(meta_data->lang_manager), "cpp");
@@ -30,9 +30,9 @@ SourceObject* create_source(MetaData *meta_data)
 
         meta_data->justify = GTK_JUSTIFY_LEFT;
         meta_data->auto_indent = TRUE;
-        meta_data->space_tabs = FALSE;
+        // meta_data->space_tabs = FALSE;
         meta_data->line_numbers = TRUE;
-        meta_data->visualize_spaces = FALSE;
+        // meta_data->visualize_spaces = FALSE;
         meta_data->highlight_line = TRUE;
         meta_data->wrap_mode = GTK_WRAP_NONE;
 
@@ -40,10 +40,10 @@ SourceObject* create_source(MetaData *meta_data)
         meta_data->regex_option = FALSE;
         meta_data->find_entries_n = 0;
         meta_data->find_entry_curr = 0;
-        meta_data->find_entries = (gchar**)malloc(sizeof(gchar*)*MAX_FIND_ENTRIES);
-        for(int i=0;i<MAX_FIND_ENTRIES;++i)
+        meta_data->find_entries = (gchar **)malloc(sizeof(gchar *) * MAX_FIND_ENTRIES);
+        for (int i = 0; i < MAX_FIND_ENTRIES; ++i)
         {
-            meta_data->find_entries[i] = (gchar*)malloc(sizeof(gchar)*MAX_ENTRY_CHAR);
+            meta_data->find_entries[i] = (gchar *)malloc(sizeof(gchar) * MAX_ENTRY_CHAR);
         }
         meta_data->tab_width = 4;
     }
@@ -63,22 +63,22 @@ SourceObject* create_source(MetaData *meta_data)
 
     gtk_container_set_border_width(GTK_CONTAINER(source_object->scrolled_window), 3);
 
-    gtk_text_view_set_left_margin((GtkTextView*)source_object->textview, 3);
-    gtk_text_view_set_right_margin((GtkTextView*)source_object->textview, 3);
-    gtk_text_view_set_pixels_above_lines((GtkTextView*)source_object->textview, 1);
-    gtk_text_view_set_justification((GtkTextView*)source_object->textview, meta_data->justify);
+    gtk_text_view_set_left_margin((GtkTextView *)source_object->textview, 3);
+    gtk_text_view_set_right_margin((GtkTextView *)source_object->textview, 3);
+    gtk_text_view_set_pixels_above_lines((GtkTextView *)source_object->textview, 1);
+    gtk_text_view_set_justification((GtkTextView *)source_object->textview, meta_data->justify);
 
     gtk_source_view_set_show_line_numbers(GTK_SOURCE_VIEW(source_object->textview), TRUE);
     gtk_source_view_set_tab_width(GTK_SOURCE_VIEW(source_object->textview), meta_data->tab_width);
-    gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW(source_object->textview), TRUE);
+    gtk_source_view_set_highlight_current_line(GTK_SOURCE_VIEW(source_object->textview), TRUE);
     gtk_source_view_set_auto_indent(GTK_SOURCE_VIEW(source_object->textview), TRUE);
 
     gtk_widget_modify_font(source_object->textview, meta_data->font_desc);
 
     gtk_container_add(GTK_CONTAINER(source_object->scrolled_window), source_object->textview);
 
-    //GSettings settings;
-    //gtk_source_space_drawer_bind_matrix_setting(drawer, &settings, "->", G_SETTINGS_BIND_DEFAULT);
+    // GSettings settings;
+    // gtk_source_space_drawer_bind_matrix_setting(drawer, &settings, "->", G_SETTINGS_BIND_DEFAULT);
 
     return source_object;
 }

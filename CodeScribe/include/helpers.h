@@ -428,9 +428,9 @@ void apply_format_prefs(MetaData *meta_data)
     int page_cnt = gtk_notebook_get_n_pages(GTK_NOTEBOOK(meta_data->notebook));
 
     gboolean change_auto_indent;
-    gboolean change_space_tabs;
+    // gboolean change_space_tabs;
     gboolean change_line_numbers;
-    gboolean change_visualize_spaces;
+    // gboolean change_visualize_spaces;
     gboolean change_highlight_line;
     gboolean change_wrap_words;
 
@@ -444,9 +444,9 @@ void apply_format_prefs(MetaData *meta_data)
         if (i == 0)
         {
             change_auto_indent = meta_data->auto_indent != gtk_source_view_get_auto_indent(textview);
-            change_space_tabs = meta_data->space_tabs != gtk_source_view_get_insert_spaces_instead_of_tabs(textview);
+            // change_space_tabs = meta_data->space_tabs != gtk_source_view_get_insert_spaces_instead_of_tabs(textview);
             change_line_numbers = meta_data->line_numbers != gtk_source_view_get_show_line_numbers(textview);
-            change_visualize_spaces = meta_data->visualize_spaces != gtk_source_space_drawer_get_enable_matrix(drawer);
+            // change_visualize_spaces = meta_data->visualize_spaces != gtk_source_space_drawer_get_enable_matrix(drawer);
             change_highlight_line = meta_data->highlight_line != gtk_source_view_get_highlight_current_line(textview);
             change_wrap_words = meta_data->wrap_mode != gtk_text_view_get_wrap_mode(textview);
         }
@@ -454,15 +454,15 @@ void apply_format_prefs(MetaData *meta_data)
         {
             gtk_source_view_set_auto_indent(textview, meta_data->auto_indent);
         }
-        if (change_space_tabs)
-        {
-            gtk_source_view_set_insert_spaces_instead_of_tabs(textview, meta_data->space_tabs);
-        }
-        if (change_visualize_spaces)
-        {
-            gtk_source_space_drawer_set_enable_matrix(drawer, meta_data->visualize_spaces);
-            printf("%d\n", meta_data->visualize_spaces);
-        }
+        // if (change_space_tabs)
+        // {
+        //     gtk_source_view_set_insert_spaces_instead_of_tabs(textview, meta_data->space_tabs);
+        // }
+        // if (change_visualize_spaces)
+        // {
+        //     gtk_source_space_drawer_set_enable_matrix(drawer, meta_data->visualize_spaces);
+        //     printf("%d\n", meta_data->visualize_spaces);
+        // }
         if (change_line_numbers)
         {
             gtk_source_view_set_show_line_numbers(textview, meta_data->line_numbers);

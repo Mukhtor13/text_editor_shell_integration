@@ -709,10 +709,10 @@ void format_callback(GtkMenuItem *item, MetaData *meta_data)
     {
         meta_data->auto_indent = !meta_data->auto_indent;
     }
-    if (strcmp(gtk_menu_item_get_label(item), "Insert spaces instead of tabs") == 0)
-    {
-        meta_data->space_tabs = !meta_data->space_tabs;
-    }
+    // if (strcmp(gtk_menu_item_get_label(item), "Insert spaces instead of tabs") == 0)
+    // {
+    //     meta_data->space_tabs = !meta_data->space_tabs;
+    // }
     if (strcmp(gtk_menu_item_get_label(item), "Highlight current line") == 0)
     {
         meta_data->highlight_line = !meta_data->highlight_line;
@@ -721,10 +721,10 @@ void format_callback(GtkMenuItem *item, MetaData *meta_data)
     {
         meta_data->line_numbers = !meta_data->line_numbers;
     }
-    if (strcmp(gtk_menu_item_get_label(item), "Display spaces as symbols") == 0)
-    {
-        meta_data->visualize_spaces = !meta_data->visualize_spaces;
-    }
+    // if (strcmp(gtk_menu_item_get_label(item), "Display spaces as symbols") == 0)
+    // {
+    //     meta_data->visualize_spaces = !meta_data->visualize_spaces;
+    // }
     if (strcmp(gtk_menu_item_get_label(item), "Text wrapping") == 0)
     {
         if (meta_data->wrap_mode == GTK_WRAP_NONE)
