@@ -336,10 +336,10 @@ void zoom_out_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     apply_font(meta_data);
 }
 
-void compilers_settings_callback()
-{
-    g_printf("%s\n", "compilers_settings_callback");
-}
+// void compilers_settings_callback()
+// {
+//     g_printf("%s\n", "compilers_settings_callback");
+// }
 
 void highlighting_settings_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
