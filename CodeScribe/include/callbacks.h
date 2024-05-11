@@ -288,36 +288,6 @@ void save_as_file_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     gtk_widget_destroy(dialog);
 }
 
-void font_settings_callback(GtkMenuItem *menu_item, MetaData *meta_data)
-{
-    GtkWidget *font_dialog;
-    gchar *fontname;
-    gchar curr_fontname[30];
-    gint len;
-    gint resp;
-
-    curr_fontname[0] = '\0';
-    font_dialog = gtk_font_selection_dialog_new("Choose a Font");
-
-    strcpy(curr_fontname, pango_font_description_get_family(meta_data->font_desc));
-    len = strlen(curr_fontname);
-    sprintf(curr_fontname + len, " %d", pango_font_description_get_size(meta_data->font_desc) / PANGO_SCALE);
-
-    gtk_font_selection_dialog_set_font_name(GTK_FONT_SELECTION_DIALOG(font_dialog), curr_fontname);
-    gtk_font_selection_dialog_set_preview_text(GTK_FONT_SELECTION_DIALOG(font_dialog), "abcdefghijk ABCDEFHIJK");
-    resp = gtk_dialog_run(GTK_DIALOG(font_dialog));
-
-    if (resp == GTK_RESPONSE_OK || resp == GTK_RESPONSE_APPLY)
-    {
-        fontname = gtk_font_selection_dialog_get_font_name(GTK_FONT_SELECTION_DIALOG(font_dialog));
-        meta_data->font_desc = pango_font_description_from_string(fontname);
-    }
-
-    gtk_widget_destroy(font_dialog);
-
-    apply_font(meta_data);
-}
-
 void zoom_in_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     int curr_size = pango_font_description_get_size(meta_data->font_desc);

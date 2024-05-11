@@ -8,7 +8,7 @@
 
 #define ICON_SIZE 4
 
-GtkWidget *create_toolbar(WindowDependecies* win_dep, MetaData* meta_data)
+GtkWidget *create_toolbar(WindowDependecies *win_dep, MetaData *meta_data)
 {
     GtkWidget *toolbar;
     GtkWidget *newTb;
@@ -23,7 +23,7 @@ GtkWidget *create_toolbar(WindowDependecies* win_dep, MetaData* meta_data)
     GtkWidget *copyTb;
     GtkWidget *pasteTb;
     GtkWidget *sep2;
-    GtkWidget *fontTb;
+    // GtkWidget *fontTb;
     GtkWidget *zoomInTb;
     GtkWidget *zoomOutTb;
     GtkWidget *sep3;
@@ -82,8 +82,8 @@ GtkWidget *create_toolbar(WindowDependecies* win_dep, MetaData* meta_data)
     zoomOutTb = gtk_tool_button_new(gtk_image_new_from_icon_name("zoom-out", ICON_SIZE), "Zoom Out");
     gtk_toolbar_insert(GTK_TOOLBAR(toolbar), zoomOutTb, -1);
 
-    fontTb = gtk_tool_button_new(gtk_image_new_from_icon_name("preferences-desktop-font", ICON_SIZE), "Font");
-    gtk_toolbar_insert(GTK_TOOLBAR(toolbar), fontTb, -1);
+    // fontTb = gtk_tool_button_new(gtk_image_new_from_icon_name("preferences-desktop-font", ICON_SIZE), "Font");
+    // gtk_toolbar_insert(GTK_TOOLBAR(toolbar), fontTb, -1);
 
     sep3 = gtk_separator_tool_item_new();
     gtk_toolbar_insert(GTK_TOOLBAR(toolbar), sep3, -1);
@@ -116,65 +116,64 @@ GtkWidget *create_toolbar(WindowDependecies* win_dep, MetaData* meta_data)
     gtk_toolbar_insert(GTK_TOOLBAR(toolbar), exitTb, -1);
 
     g_signal_connect(G_OBJECT(newTb), "clicked",
-        G_CALLBACK(new_file_callback), meta_data);
+                     G_CALLBACK(new_file_callback), meta_data);
 
     g_signal_connect(G_OBJECT(openTb), "clicked",
-        G_CALLBACK(open_file_callback), meta_data);
+                     G_CALLBACK(open_file_callback), meta_data);
 
     g_signal_connect(G_OBJECT(saveTb), "clicked",
-        G_CALLBACK(save_file_callback), meta_data);
+                     G_CALLBACK(save_file_callback), meta_data);
 
     g_signal_connect(G_OBJECT(saveAsTb), "clicked",
-        G_CALLBACK(save_as_file_callback), meta_data);
+                     G_CALLBACK(save_as_file_callback), meta_data);
 
     g_signal_connect(G_OBJECT(closeTb), "clicked",
-        G_CALLBACK(close_file_callback), meta_data);
+                     G_CALLBACK(close_file_callback), meta_data);
 
     g_signal_connect(G_OBJECT(undoTb), "clicked",
-        G_CALLBACK(undo_callback), meta_data);
+                     G_CALLBACK(undo_callback), meta_data);
 
     g_signal_connect(G_OBJECT(redoTb), "clicked",
-        G_CALLBACK(redo_callback), meta_data);
+                     G_CALLBACK(redo_callback), meta_data);
 
     g_signal_connect(G_OBJECT(cutTb), "clicked",
-        G_CALLBACK(cut_callback), meta_data);
+                     G_CALLBACK(cut_callback), meta_data);
 
     g_signal_connect(G_OBJECT(copyTb), "clicked",
-        G_CALLBACK(copy_callback), meta_data);
+                     G_CALLBACK(copy_callback), meta_data);
 
     g_signal_connect(G_OBJECT(pasteTb), "clicked",
-        G_CALLBACK(paste_callback), meta_data);
+                     G_CALLBACK(paste_callback), meta_data);
 
     g_signal_connect(G_OBJECT(runTb), "clicked",
-        G_CALLBACK(run_callback), meta_data);
+                     G_CALLBACK(run_callback), meta_data);
 
     g_signal_connect(G_OBJECT(compileTb), "clicked",
-        G_CALLBACK(compile_callback), meta_data);
+                     G_CALLBACK(compile_callback), meta_data);
 
     g_signal_connect(G_OBJECT(compile_and_runTb), "clicked",
-        G_CALLBACK(compile_and_run_callback), meta_data);
+                     G_CALLBACK(compile_and_run_callback), meta_data);
 
     g_signal_connect(G_OBJECT(search_Tb), "clicked",
-        G_CALLBACK(find_callback), meta_data);
+                     G_CALLBACK(find_callback), meta_data);
 
     g_signal_connect(G_OBJECT(goto_Tb), "clicked",
-        G_CALLBACK(goto_callback), meta_data);
+                     G_CALLBACK(goto_callback), meta_data);
 
-    g_signal_connect(G_OBJECT(fontTb), "clicked",
-        G_CALLBACK(font_settings_callback), meta_data);
+    // g_signal_connect(G_OBJECT(fontTb), "clicked",
+    //     G_CALLBACK(font_settings_callback), meta_data);
 
     g_signal_connect(G_OBJECT(zoomInTb), "clicked",
-        G_CALLBACK(zoom_in_callback), meta_data);
+                     G_CALLBACK(zoom_in_callback), meta_data);
 
     g_signal_connect(G_OBJECT(zoomOutTb), "clicked",
-        G_CALLBACK(zoom_out_callback), meta_data);
+                     G_CALLBACK(zoom_out_callback), meta_data);
 
     g_signal_connect(G_OBJECT(aboutTb), "clicked",
-        G_CALLBACK(about_callback), (gpointer) win_dep->window);
+                     G_CALLBACK(about_callback), (gpointer)win_dep->window);
 
     g_signal_connect(G_OBJECT(exitTb), "clicked",
-        G_CALLBACK(gtk_main_quit), NULL);
-
+                     G_CALLBACK(gtk_main_quit), NULL);
 
     gtk_toolbar_set_style(toolbar, GTK_TOOLBAR_BOTH);
     return toolbar;

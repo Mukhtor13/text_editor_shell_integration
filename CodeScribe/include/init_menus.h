@@ -203,7 +203,7 @@ void *create_settings_submenu(WindowDependecies *win_dep, GtkWidget **s_menu, Gt
 {
     GtkWidget *settings_menu;
     GtkWidget *settings_mi;
-    GtkWidget *font_mi;
+    // GtkWidget *font_mi;
     GtkWidget *compilers_mi;
 
     GtkWidget *highlighting_mi;
@@ -217,22 +217,22 @@ void *create_settings_submenu(WindowDependecies *win_dep, GtkWidget **s_menu, Gt
     settings_menu = gtk_menu_new();
 
     settings_mi = gtk_menu_item_new_with_label("Settings");
-    font_mi = gtk_menu_item_new_with_label("Font");
+    // font_mi = gtk_menu_item_new_with_label("Font");
     compilers_mi = gtk_menu_item_new_with_label("Compilers");
 
     create_highlights_modes_submenu(win_dep, &highlighting_menu, &highlighting_mi, meta_data);
     create_schemes_modes_submenu(win_dep, &schemes_menu, &schemes_mi, meta_data);
 
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(settings_mi), settings_menu);
-    gtk_menu_shell_append(GTK_MENU_SHELL(settings_menu), font_mi);
+    // gtk_menu_shell_append(GTK_MENU_SHELL(settings_menu), font_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(settings_menu), compilers_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(settings_menu), schemes_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(settings_menu), highlighting_mi);
 
-    g_signal_connect(G_OBJECT(font_mi), "activate", G_CALLBACK(font_settings_callback), meta_data);
+    // g_signal_connect(G_OBJECT(font_mi), "activate", G_CALLBACK(font_settings_callback), meta_data);
     g_signal_connect(G_OBJECT(compilers_mi), "activate", G_CALLBACK(compilers_settings_callback), NULL);
 
-    gtk_widget_add_accelerator(GTK_MENU_ITEM(font_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_t, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+    // gtk_widget_add_accelerator(GTK_MENU_ITEM(font_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_t, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
     gtk_widget_add_accelerator(GTK_MENU_ITEM(compilers_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_l, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
     gtk_widget_add_accelerator(GTK_MENU_ITEM(highlighting_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_h, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
