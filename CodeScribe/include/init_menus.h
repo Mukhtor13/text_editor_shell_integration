@@ -430,27 +430,27 @@ void *create_format_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaD
     GList *group = NULL;
     GtkWidget *format_menu;
     GtkWidget *format_mi;
-    GtkWidget *justify_smenu;
-    GtkWidget *justify_smi;
+    // GtkWidget *justify_smenu;
+    // GtkWidget *justify_smi;
     GtkWidget *auto_indent_mi;
     GtkWidget *space_tabs_mi;
     GtkWidget *highlight_line_mi;
     GtkWidget *line_numbers_mi;
     GtkWidget *visualize_spaces_mi;
     GtkWidget *wrap_words_mi;
-    GtkWidget *justify_left_mi;
-    GtkWidget *justify_right_mi;
-    GtkWidget *justify_center_mi;
-    GtkWidget *justify_fill_mi;
+    // GtkWidget *justify_left_mi;
+    // GtkWidget *justify_right_mi;
+    // GtkWidget *justify_center_mi;
+    // GtkWidget *justify_fill_mi;
     GtkWidget *tab_width_head_mi;
 
     GtkWidget *accel_group = win_dep->accel_group;
 
     format_menu = gtk_menu_new();
-    justify_smenu = gtk_menu_new();
+    // justify_smenu = gtk_menu_new();
 
     format_mi = gtk_menu_item_new_with_mnemonic("F_ormat");
-    justify_smi = gtk_menu_item_new_with_label("Justify");
+    // justify_smi = gtk_menu_item_new_with_label("Justify");
     auto_indent_mi = gtk_check_menu_item_new_with_label("Enable Auto-Indent");
     gtk_check_menu_item_set_active(auto_indent_mi, TRUE);
     space_tabs_mi = gtk_check_menu_item_new_with_label("Insert spaces instead of tabs");
@@ -462,17 +462,17 @@ void *create_format_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaD
     wrap_words_mi = gtk_check_menu_item_new_with_label("Text wrapping");
     create_tab_width_menu(meta_data, &tab_width_head_mi);
 
-    justify_left_mi = gtk_radio_menu_item_new_with_label(group, "Align Left");
-    group = gtk_radio_menu_item_get_group(justify_left_mi);
-    justify_center_mi = gtk_radio_menu_item_new_with_label(group, "Align Center");
-    group = gtk_radio_menu_item_get_group(justify_center_mi);
-    justify_right_mi = gtk_radio_menu_item_new_with_label(group, "Align Right");
-    group = gtk_radio_menu_item_get_group(justify_right_mi);
-    justify_fill_mi = gtk_radio_menu_item_new_with_label(group, "Align Fill");
-    group = gtk_radio_menu_item_get_group(justify_fill_mi);
+    // justify_left_mi = gtk_radio_menu_item_new_with_label(group, "Align Left");
+    // group = gtk_radio_menu_item_get_group(justify_left_mi);
+    // justify_center_mi = gtk_radio_menu_item_new_with_label(group, "Align Center");
+    // group = gtk_radio_menu_item_get_group(justify_center_mi);
+    // justify_right_mi = gtk_radio_menu_item_new_with_label(group, "Align Right");
+    // group = gtk_radio_menu_item_get_group(justify_right_mi);
+    // justify_fill_mi = gtk_radio_menu_item_new_with_label(group, "Align Fill");
+    // group = gtk_radio_menu_item_get_group(justify_fill_mi);
 
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(format_mi), format_menu);
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(justify_smi), justify_smenu);
+    // gtk_menu_item_set_submenu(GTK_MENU_ITEM(justify_smi), justify_smenu);
     gtk_menu_shell_append(GTK_MENU_SHELL(format_menu), auto_indent_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(format_menu), space_tabs_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(format_menu), line_numbers_mi);
@@ -480,11 +480,11 @@ void *create_format_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaD
     gtk_menu_shell_append(GTK_MENU_SHELL(format_menu), highlight_line_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(format_menu), wrap_words_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(format_menu), tab_width_head_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(format_menu), justify_smi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(justify_smenu), justify_left_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(justify_smenu), justify_center_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(justify_smenu), justify_right_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(justify_smenu), justify_fill_mi);
+    // gtk_menu_shell_append(GTK_MENU_SHELL(format_menu), justify_smi);
+    // gtk_menu_shell_append(GTK_MENU_SHELL(justify_smenu), justify_left_mi);
+    // gtk_menu_shell_append(GTK_MENU_SHELL(justify_smenu), justify_center_mi);
+    // gtk_menu_shell_append(GTK_MENU_SHELL(justify_smenu), justify_right_mi);
+    // gtk_menu_shell_append(GTK_MENU_SHELL(justify_smenu), justify_fill_mi);
 
     g_signal_connect(G_OBJECT(auto_indent_mi), "toggled", G_CALLBACK(format_callback), meta_data);
     g_signal_connect(G_OBJECT(space_tabs_mi), "toggled", G_CALLBACK(format_callback), meta_data);
@@ -492,10 +492,10 @@ void *create_format_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaD
     g_signal_connect(G_OBJECT(visualize_spaces_mi), "toggled", G_CALLBACK(format_callback), meta_data);
     g_signal_connect(G_OBJECT(highlight_line_mi), "toggled", G_CALLBACK(format_callback), meta_data);
     g_signal_connect(G_OBJECT(wrap_words_mi), "toggled", G_CALLBACK(format_callback), meta_data);
-    g_signal_connect(G_OBJECT(justify_left_mi), "activate", G_CALLBACK(justify_menu_callback), meta_data);
-    g_signal_connect(G_OBJECT(justify_center_mi), "activate", G_CALLBACK(justify_menu_callback), meta_data);
-    g_signal_connect(G_OBJECT(justify_right_mi), "activate", G_CALLBACK(justify_menu_callback), meta_data);
-    g_signal_connect(G_OBJECT(justify_fill_mi), "activate", G_CALLBACK(justify_menu_callback), meta_data);
+    // g_signal_connect(G_OBJECT(justify_left_mi), "activate", G_CALLBACK(justify_menu_callback), meta_data);
+    // g_signal_connect(G_OBJECT(justify_center_mi), "activate", G_CALLBACK(justify_menu_callback), meta_data);
+    // g_signal_connect(G_OBJECT(justify_right_mi), "activate", G_CALLBACK(justify_menu_callback), meta_data);
+    // g_signal_connect(G_OBJECT(justify_fill_mi), "activate", G_CALLBACK(justify_menu_callback), meta_data);
 
     // gtk_widget_add_accelerator(GTK_MENU_ITEM(undo_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_z, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
     // gtk_widget_add_accelerator(GTK_MENU_ITEM(cut_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_x, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
@@ -509,10 +509,10 @@ void *create_format_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaD
     menubar_obj->format_menu->line_numbers_mi = line_numbers_mi;
     menubar_obj->format_menu->visualize_spaces_mi = visualize_spaces_mi;
     menubar_obj->format_menu->wrap_words_mi = wrap_words_mi;
-    menubar_obj->format_menu->justify_left_mi = justify_left_mi;
-    menubar_obj->format_menu->justify_center_mi = justify_center_mi;
-    menubar_obj->format_menu->justify_right_mi = justify_right_mi;
-    menubar_obj->format_menu->justify_fill_mi = justify_fill_mi;
+    // menubar_obj->format_menu->justify_left_mi = justify_left_mi;
+    // menubar_obj->format_menu->justify_center_mi = justify_center_mi;
+    // menubar_obj->format_menu->justify_right_mi = justify_right_mi;
+    // menubar_obj->format_menu->justify_fill_mi = justify_fill_mi;
 }
 
 void *create_search_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data)

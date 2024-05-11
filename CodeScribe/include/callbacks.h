@@ -690,18 +690,18 @@ void insert_date_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     gtk_text_buffer_insert(buffer, &iter, date, strlen(date));
 }
 
-void justify_menu_callback(GtkMenuItem *item, MetaData *meta_data)
-{
-    if (strcmp(gtk_menu_item_get_label(item), "Align Left") == 0)
-        meta_data->justify = GTK_JUSTIFY_LEFT;
-    if (strcmp(gtk_menu_item_get_label(item), "Align Center") == 0)
-        meta_data->justify = GTK_JUSTIFY_CENTER;
-    if (strcmp(gtk_menu_item_get_label(item), "Align Right") == 0)
-        meta_data->justify = GTK_JUSTIFY_RIGHT;
-    if (strcmp(gtk_menu_item_get_label(item), "Align Fill") == 0)
-        meta_data->justify = GTK_JUSTIFY_FILL;
-    apply_specification(meta_data);
-}
+// void justify_menu_callback(GtkMenuItem *item, MetaData *meta_data)
+// {
+//     if (strcmp(gtk_menu_item_get_label(item), "Align Left") == 0)
+//         meta_data->justify = GTK_JUSTIFY_LEFT;
+//     if (strcmp(gtk_menu_item_get_label(item), "Align Center") == 0)
+//         meta_data->justify = GTK_JUSTIFY_CENTER;
+//     if (strcmp(gtk_menu_item_get_label(item), "Align Right") == 0)
+//         meta_data->justify = GTK_JUSTIFY_RIGHT;
+//     if (strcmp(gtk_menu_item_get_label(item), "Align Fill") == 0)
+//         meta_data->justify = GTK_JUSTIFY_FILL;
+//     apply_specification(meta_data);
+// }
 
 void format_callback(GtkMenuItem *item, MetaData *meta_data)
 {
