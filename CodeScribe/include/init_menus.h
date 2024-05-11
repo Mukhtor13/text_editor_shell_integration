@@ -6,26 +6,26 @@
 #include "menu_objects.h"
 #include "WindowDependecies.h"
 
-void *create_schemes_modes_submenu(WindowDependecies* win_dep, GtkWidget **s_menu, GtkWidget **s_mi, MetaData* meta_data)
+void *create_schemes_modes_submenu(WindowDependecies *win_dep, GtkWidget **s_menu, GtkWidget **s_mi, MetaData *meta_data)
 {
     GtkWidget *schemes_menu;
     GtkWidget *schemes_mi;
     GSList *group = NULL;
 
-    GtkWidget *classic_mi = gtk_radio_menu_item_new_with_label (group, "Classic");
-    group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (classic_mi));
-    GtkWidget *cobalt_mi = gtk_radio_menu_item_new_with_label (group, "Cobalt");
-    group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (cobalt_mi));
-    GtkWidget *kate_mi = gtk_radio_menu_item_new_with_label (group, "Kate");
-    group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (kate_mi));
-    GtkWidget *oblivion_mi = gtk_radio_menu_item_new_with_label (group, "Oblivion");
-    group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (oblivion_mi));
-    GtkWidget *solarized_light_mi = gtk_radio_menu_item_new_with_label (group, "Solarized-Light");
-    group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (solarized_light_mi));
-    GtkWidget *solarized_dark_mi = gtk_radio_menu_item_new_with_label (group, "Solarized-Dark");
-    group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (solarized_dark_mi));
-    GtkWidget *tango_mi = gtk_radio_menu_item_new_with_label (group, "Tango");
-    group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (tango_mi));
+    GtkWidget *classic_mi = gtk_radio_menu_item_new_with_label(group, "Classic");
+    group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(classic_mi));
+    GtkWidget *cobalt_mi = gtk_radio_menu_item_new_with_label(group, "Cobalt");
+    group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(cobalt_mi));
+    GtkWidget *kate_mi = gtk_radio_menu_item_new_with_label(group, "Kate");
+    group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(kate_mi));
+    GtkWidget *oblivion_mi = gtk_radio_menu_item_new_with_label(group, "Oblivion");
+    group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(oblivion_mi));
+    GtkWidget *solarized_light_mi = gtk_radio_menu_item_new_with_label(group, "Solarized-Light");
+    group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(solarized_light_mi));
+    GtkWidget *solarized_dark_mi = gtk_radio_menu_item_new_with_label(group, "Solarized-Dark");
+    group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(solarized_dark_mi));
+    GtkWidget *tango_mi = gtk_radio_menu_item_new_with_label(group, "Tango");
+    group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(tango_mi));
 
     gtk_check_menu_item_set_active(oblivion_mi, TRUE);
 
@@ -54,36 +54,7 @@ void *create_schemes_modes_submenu(WindowDependecies* win_dep, GtkWidget **s_men
     *s_mi = schemes_mi;
 }
 
-void *create_shells_submenu(WindowDependecies* win_dep, GtkWidget **s_menu, GtkWidget **s_mi, MetaData* meta_data)
-{
-    GtkWidget *shells_menu;
-    GtkWidget *shells_mi;
-
-    GtkWidget *sh_mi = gtk_menu_item_new_with_label("Bourne shell");
-    GtkWidget *bash_mi = gtk_menu_item_new_with_label("Bourne-Again shell");
-    GtkWidget *ksh_mi = gtk_menu_item_new_with_label("Koch shell");
-    GtkWidget *dash_mi = gtk_menu_item_new_with_label("Debian Almquist shell");
-
-    shells_menu = gtk_menu_new();
-
-    shells_mi = gtk_menu_item_new_with_label("Shells");
-
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(shells_mi), shells_menu);
-    gtk_menu_shell_append(GTK_MENU_SHELL(shells_menu), sh_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(shells_menu), bash_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(shells_menu), ksh_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(shells_menu), dash_mi);
-
-    g_signal_connect(G_OBJECT(sh_mi), "activate", G_CALLBACK(shell_settings_callback), meta_data);
-    g_signal_connect(G_OBJECT(bash_mi), "activate", G_CALLBACK(shell_settings_callback), meta_data);
-    g_signal_connect(G_OBJECT(ksh_mi), "activate", G_CALLBACK(shell_settings_callback), meta_data);
-    g_signal_connect(G_OBJECT(dash_mi), "activate", G_CALLBACK(shell_settings_callback), meta_data);
-
-    *s_menu = shells_menu;
-    *s_mi = shells_mi;
-}
-
-void *create_highlights_modes_submenu(WindowDependecies* win_dep, GtkWidget **h_menu, GtkWidget **h_mi, MetaData* meta_data)
+void *create_highlights_modes_submenu(WindowDependecies *win_dep, GtkWidget **h_menu, GtkWidget **h_mi, MetaData *meta_data)
 {
     GtkWidget *highlighting_menu;
     GtkWidget *highlighting_mi;
@@ -228,7 +199,7 @@ void *create_highlights_modes_submenu(WindowDependecies* win_dep, GtkWidget **h_
     *h_mi = highlighting_mi;
 }
 
-void *create_settings_submenu(WindowDependecies* win_dep, GtkWidget **s_menu, GtkWidget **s_mi, MetaData* meta_data)
+void *create_settings_submenu(WindowDependecies *win_dep, GtkWidget **s_menu, GtkWidget **s_mi, MetaData *meta_data)
 {
     GtkWidget *settings_menu;
     GtkWidget *settings_mi;
@@ -237,10 +208,8 @@ void *create_settings_submenu(WindowDependecies* win_dep, GtkWidget **s_menu, Gt
 
     GtkWidget *highlighting_mi;
     GtkWidget *schemes_mi;
-    GtkWidget *shells_mi;
 
     GtkWidget *schemes_menu;
-    GtkWidget *shells_menu;
     GtkWidget *highlighting_menu;
 
     GtkWidget *accel_group = win_dep->accel_group;
@@ -253,12 +222,10 @@ void *create_settings_submenu(WindowDependecies* win_dep, GtkWidget **s_menu, Gt
 
     create_highlights_modes_submenu(win_dep, &highlighting_menu, &highlighting_mi, meta_data);
     create_schemes_modes_submenu(win_dep, &schemes_menu, &schemes_mi, meta_data);
-    create_shells_submenu(win_dep, &shells_menu, &shells_mi, meta_data);
 
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(settings_mi), settings_menu);
     gtk_menu_shell_append(GTK_MENU_SHELL(settings_menu), font_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(settings_menu), compilers_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(settings_menu), shells_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(settings_menu), schemes_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(settings_menu), highlighting_mi);
 
@@ -273,7 +240,7 @@ void *create_settings_submenu(WindowDependecies* win_dep, GtkWidget **s_menu, Gt
     *s_mi = settings_mi;
 }
 
-void *create_file_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaData* meta_data)
+void *create_file_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data)
 {
     GtkWidget *file_menu;
     GtkWidget *file_mi;
@@ -351,7 +318,7 @@ void *create_file_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaDat
     menubar_obj->file_menu->quit_mi = quit_mi;
 }
 
-void *create_edit_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaData* meta_data)
+void *create_edit_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data)
 {
     GtkWidget *edit_menu;
     GtkWidget *edit_mi;
@@ -431,26 +398,26 @@ void *create_edit_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaDat
     menubar_obj->edit_menu->insert_date_mi = insert_date_mi;
 }
 
-void create_tab_width_menu(MetaData* meta_data, GtkWidget** twh_mi)
+void create_tab_width_menu(MetaData *meta_data, GtkWidget **twh_mi)
 {
-    GtkWidget* tab_width_menu;
-    GtkWidget* tab_width_head_mi;
-    GSList* group = NULL;
-    GtkWidget* tab_width_mis[MAX_TAB_WIDTH];
+    GtkWidget *tab_width_menu;
+    GtkWidget *tab_width_head_mi;
+    GSList *group = NULL;
+    GtkWidget *tab_width_mis[MAX_TAB_WIDTH];
 
-    for(int i=0;i<MAX_TAB_WIDTH;++i)
+    for (int i = 0; i < MAX_TAB_WIDTH; ++i)
     {
-        gchar* label = g_strdup_printf("Tab width: %d", i+1);
-        tab_width_mis[i] = gtk_radio_menu_item_new_with_label (group, label);
-        group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (tab_width_mis[i]));
+        gchar *label = g_strdup_printf("Tab width: %d", i + 1);
+        tab_width_mis[i] = gtk_radio_menu_item_new_with_label(group, label);
+        group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(tab_width_mis[i]));
         g_free(label);
     }
-    gtk_check_menu_item_set_active(tab_width_mis[meta_data->tab_width-1], TRUE);
+    gtk_check_menu_item_set_active(tab_width_mis[meta_data->tab_width - 1], TRUE);
     tab_width_menu = gtk_menu_new();
 
     tab_width_head_mi = gtk_menu_item_new_with_label("Tab width");
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(tab_width_head_mi), tab_width_menu);
-    for(int i=0;i<MAX_TAB_WIDTH;++i)
+    for (int i = 0; i < MAX_TAB_WIDTH; ++i)
     {
         gtk_menu_shell_append(GTK_MENU_SHELL(tab_width_menu), tab_width_mis[i]);
         g_signal_connect(G_OBJECT(tab_width_mis[i]), "toggled", G_CALLBACK(tab_width_menu_callback), meta_data);
@@ -458,24 +425,24 @@ void create_tab_width_menu(MetaData* meta_data, GtkWidget** twh_mi)
     *twh_mi = tab_width_head_mi;
 }
 
-void *create_format_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaData* meta_data)
+void *create_format_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data)
 {
-    GList* group = NULL;
-    GtkWidget* format_menu;
-    GtkWidget* format_mi;
-    GtkWidget* justify_smenu;
-    GtkWidget* justify_smi;
-    GtkWidget* auto_indent_mi;
-    GtkWidget* space_tabs_mi;
-    GtkWidget* highlight_line_mi;
-    GtkWidget* line_numbers_mi;
-    GtkWidget* visualize_spaces_mi;
-    GtkWidget* wrap_words_mi;
-    GtkWidget* justify_left_mi;
-    GtkWidget* justify_right_mi;
-    GtkWidget* justify_center_mi;
-    GtkWidget* justify_fill_mi;
-    GtkWidget* tab_width_head_mi;
+    GList *group = NULL;
+    GtkWidget *format_menu;
+    GtkWidget *format_mi;
+    GtkWidget *justify_smenu;
+    GtkWidget *justify_smi;
+    GtkWidget *auto_indent_mi;
+    GtkWidget *space_tabs_mi;
+    GtkWidget *highlight_line_mi;
+    GtkWidget *line_numbers_mi;
+    GtkWidget *visualize_spaces_mi;
+    GtkWidget *wrap_words_mi;
+    GtkWidget *justify_left_mi;
+    GtkWidget *justify_right_mi;
+    GtkWidget *justify_center_mi;
+    GtkWidget *justify_fill_mi;
+    GtkWidget *tab_width_head_mi;
 
     GtkWidget *accel_group = win_dep->accel_group;
 
@@ -530,10 +497,10 @@ void *create_format_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaD
     g_signal_connect(G_OBJECT(justify_right_mi), "activate", G_CALLBACK(justify_menu_callback), meta_data);
     g_signal_connect(G_OBJECT(justify_fill_mi), "activate", G_CALLBACK(justify_menu_callback), meta_data);
 
-    //gtk_widget_add_accelerator(GTK_MENU_ITEM(undo_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_z, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-    //gtk_widget_add_accelerator(GTK_MENU_ITEM(cut_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_x, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-    //gtk_widget_add_accelerator(GTK_MENU_ITEM(copy_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-    //gtk_widget_add_accelerator(GTK_MENU_ITEM(paste_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_v, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+    // gtk_widget_add_accelerator(GTK_MENU_ITEM(undo_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_z, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+    // gtk_widget_add_accelerator(GTK_MENU_ITEM(cut_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_x, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+    // gtk_widget_add_accelerator(GTK_MENU_ITEM(copy_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+    // gtk_widget_add_accelerator(GTK_MENU_ITEM(paste_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_v, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
     menubar_obj->format_menu->format_menu = format_menu;
     menubar_obj->format_menu->format_mi = format_mi;
@@ -548,7 +515,7 @@ void *create_format_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaD
     menubar_obj->format_menu->justify_fill_mi = justify_fill_mi;
 }
 
-void *create_search_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaData* meta_data)
+void *create_search_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data)
 {
     GtkWidget *search_menu;
     GtkWidget *search_mi;
@@ -564,7 +531,6 @@ void *create_search_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaD
     find_mi = gtk_menu_item_new_with_label("Find");
     replace_mi = gtk_menu_item_new_with_label("Replace");
     goto_mi = gtk_menu_item_new_with_label("Go to line");
-
 
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(search_mi), search_menu);
     gtk_menu_shell_append(GTK_MENU_SHELL(search_menu), find_mi);
@@ -584,10 +550,9 @@ void *create_search_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaD
     menubar_obj->search_menu->find_mi = find_mi;
     menubar_obj->search_menu->replace_mi = replace_mi;
     menubar_obj->search_menu->goto_mi = goto_mi;
-
 }
 
-void *create_build_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaData* meta_data)
+void *create_build_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data)
 {
     GtkWidget *build_menu;
     GtkWidget *build_mi;
@@ -603,7 +568,6 @@ void *create_build_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaDa
     compile_mi = gtk_menu_item_new_with_label("Compile");
     run_mi = gtk_menu_item_new_with_label("Run");
     compile_and_run_mi = gtk_menu_item_new_with_label("Compile and run");
-
 
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(build_mi), build_menu);
     gtk_menu_shell_append(GTK_MENU_SHELL(build_menu), compile_mi);
@@ -623,10 +587,9 @@ void *create_build_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaDa
     menubar_obj->build_menu->compile_mi = compile_mi;
     menubar_obj->build_menu->run_mi = run_mi;
     menubar_obj->build_menu->compile_and_run_mi = compile_and_run_mi;
-
 }
 
-void *create_help_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaData* meta_data)
+void *create_help_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data)
 {
     GtkWidget *help_menu;
     GtkWidget *help_mi;
@@ -656,7 +619,7 @@ void *create_help_menu(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaDat
     menubar_obj->help_menu->about_mi = about_mi;
 }
 
-GtkWidget *create_menubar(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaData* meta_data)
+GtkWidget *create_menubar(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data)
 {
     GtkWidget *menubar;
 

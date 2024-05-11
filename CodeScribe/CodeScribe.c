@@ -4,12 +4,12 @@
 #include "include/init_functions.h"
 #include "include/helpers.h"
 #include "include/WindowDependecies.h"
-#include "include/tree.h"
 
 #include <vte/vte.h>
 #include <gdk/gdk.h>
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 
   GtkWidget *window;
   GtkWidget *terminal;
@@ -56,9 +56,6 @@ int main(int argc, char *argv[]) {
 
   vbox = create_menu_vbox(&win_dep, &menubar_obj, &meta_data, &notebook, &terminal);
 
-  //broswer_view = create_view_and_model();
-  //selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(broswer_view));
-
   gtk_container_add(GTK_CONTAINER(window), vbox);
 
   gtk_widget_show_all(window);
@@ -69,4 +66,3 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
-

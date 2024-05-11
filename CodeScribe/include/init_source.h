@@ -45,7 +45,7 @@ SourceObject* create_source(MetaData *meta_data)
         {
             meta_data->find_entries[i] = (gchar*)malloc(sizeof(gchar)*MAX_ENTRY_CHAR);
         }
-        meta_data->tab_width = 5;
+        meta_data->tab_width = 4;
     }
 
     buffer = gtk_source_buffer_new_with_language(meta_data->lang);

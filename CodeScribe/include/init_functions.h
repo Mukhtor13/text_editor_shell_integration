@@ -25,17 +25,16 @@ GtkWidget *init_code_scribe()
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_container_set_border_width(GTK_CONTAINER(window), 0);
 
-    icon = create_icon("resources/CodeScribeIcon64x64.png");
+    icon = create_icon("/home/mukhtor/Desktop/text_editor_shell_integration/CodeScribe/resources/CodeScribeIcon64x64.png");
     gtk_window_set_icon(GTK_WINDOW(window), icon);
     g_object_unref(icon);
 
     return window;
 }
 
-GtkWidget *create_menu_vbox(WindowDependecies* win_dep, MenuBar* menubar_obj, MetaData* meta_data, GtkWidget** n, GtkWidget** t)
+GtkWidget *create_menu_vbox(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaData *meta_data, GtkWidget **n, GtkWidget **t)
 {
     GtkWidget *vbox;
-    GtkWidget *tbox;
     GtkWidget *menubar;
     GtkWidget *toolbar;
     GtkWidget *notebook;
@@ -50,7 +49,7 @@ GtkWidget *create_menu_vbox(WindowDependecies* win_dep, MenuBar* menubar_obj, Me
     gtk_box_pack_start(GTK_BOX(vbox), menubar, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(vbox), toolbar, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(vbox), notebook, TRUE, TRUE, 0);
-    gtk_container_set_border_width (GTK_CONTAINER (notebook), 4);
+    gtk_container_set_border_width(GTK_CONTAINER(notebook), 4);
 
     *n = notebook;
     return vbox;

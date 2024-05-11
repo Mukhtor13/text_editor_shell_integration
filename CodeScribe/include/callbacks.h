@@ -12,42 +12,42 @@
 #include <gtksourceview-3.0/gtksourceview/gtksourcestyleschememanager.h>
 #include <gtksourceview-3.0/gtksourceview/gtksourcestyleschemechooserbutton.h>
 
-void save_file_callback(GtkMenuItem *menu_item, MetaData* meta_data);
+void save_file_callback(GtkMenuItem *menu_item, MetaData *meta_data);
 void mark_set_callback(GtkTextBuffer *buffer, const GtkTextIter *new_location, GtkTextMark *mark, gpointer data);
-void update_statusbar_language(GtkSourceBuffer *buffer, GtkStatusbar  *statusbar);
-void update_statusbar_col_lines(GtkSourceBuffer *buffer, GtkStatusbar  *statusbar);
-void update_unsaved_tab(GtkSourceBuffer* buffer, GtkWidget* tab);
+void update_statusbar_language(GtkSourceBuffer *buffer, GtkStatusbar *statusbar);
+void update_statusbar_col_lines(GtkSourceBuffer *buffer, GtkStatusbar *statusbar);
+void update_unsaved_tab(GtkSourceBuffer *buffer, GtkWidget *tab);
 
-void dummy_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void dummy_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     g_printf("Not yet implemented\n");
 }
 
-void tab_width_menu_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void tab_width_menu_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     gchar text[] = {"Tab width: "};
-    gchar* label = gtk_menu_item_get_label(menu_item);
+    gchar *label = gtk_menu_item_get_label(menu_item);
     gint width = label[strlen(text)] - '0';
     meta_data->tab_width = width;
     apply_tab_width(meta_data);
 }
 
-void new_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void new_file_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
-    SourceObject* source_object;
-    GtkWidget* box;
-    GtkWidget* statusbar_col_lines;
-    GtkWidget* statusbar_language;
-    GtkWidget* statusbar_shell;
-    GtkWidget* statusbar_font;
-    GtkWidget* statusbar_tab_width;
-    GtkWidget* tab_width_menu;
-    GtkWidget* statusbox;
-    GtkWidget* status_align;
-    GtkWidget* buffer;
-    GtkWidget* filename;
-    GtkWidget* isSaved;
-    GtkWidget* notebook = meta_data->notebook;
+    SourceObject *source_object;
+    GtkWidget *box;
+    GtkWidget *statusbar_col_lines;
+    GtkWidget *statusbar_language;
+    GtkWidget *statusbar_shell;
+    GtkWidget *statusbar_font;
+    GtkWidget *statusbar_tab_width;
+    GtkWidget *tab_width_menu;
+    GtkWidget *statusbox;
+    GtkWidget *status_align;
+    GtkWidget *buffer;
+    GtkWidget *filename;
+    GtkWidget *isSaved;
+    GtkWidget *notebook = meta_data->notebook;
 
     source_object = create_source(meta_data);
 
@@ -78,16 +78,16 @@ void new_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     gtk_container_add(GTK_BOX(statusbox), status_align);
     gtk_box_pack_start(GTK_BOX(statusbox), statusbar_col_lines, FALSE, FALSE, 0);
 
-    gchar* shell_msg = g_strdup_printf("Shell: %s", "Bourne-Again shell");
+    gchar *shell_msg = g_strdup_printf("Shell: %s", "Bourne-Again shell");
     gtk_statusbar_push(statusbar_shell, 0, shell_msg);
     g_free(shell_msg);
 
-    gchar* font_msg = g_strdup_printf("Font: %s", pango_font_description_to_string(meta_data->font_desc));
+    gchar *font_msg = g_strdup_printf("Font: %s", pango_font_description_to_string(meta_data->font_desc));
     gtk_statusbar_push(statusbar_font, 0, font_msg);
     g_free(font_msg);
 
     gint tab_width = gtk_source_view_get_tab_width(GTK_SOURCE_VIEW(source_object->textview));
-    gchar* tab_width_msg = g_strdup_printf("Tab width: %d", tab_width);
+    gchar *tab_width_msg = g_strdup_printf("Tab width: %d", tab_width);
     gtk_statusbar_push(statusbar_tab_width, 0, tab_width_msg);
     g_free(tab_width_msg);
 
@@ -101,39 +101,39 @@ void new_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     g_signal_emit_by_name(buffer, "changed");
     gtk_widget_show_all(GTK_WIDGET(notebook));
 
-    gint curr_ind = gtk_notebook_get_n_pages(GTK_NOTEBOOK(notebook))-1;
-    GtkWidget* curr_page = gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), curr_ind);
+    gint curr_ind = gtk_notebook_get_n_pages(GTK_NOTEBOOK(notebook)) - 1;
+    GtkWidget *curr_page = gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), curr_ind);
     gtk_notebook_set_tab_reorderable(GTK_NOTEBOOK(notebook), curr_page, TRUE);
 
-    GtkWidget* tab_name = gtk_notebook_get_tab_label(meta_data->notebook, curr_page);
+    GtkWidget *tab_name = gtk_notebook_get_tab_label(meta_data->notebook, curr_page);
     g_signal_connect(buffer, "changed", G_CALLBACK(update_unsaved_tab), tab_name);
 }
 
-void open_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void open_file_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
-    GtkWidget* dialog;
-    GtkWidget* save_dialog, *error_dialog;
+    GtkWidget *dialog;
+    GtkWidget *save_dialog, *error_dialog;
     gint current_page;
     gint id;
     gint offset;
-    gchar* filename;
-    gchar* contents;
-    GtkWidget* scrolled_win;
-    GtkWidget* view;
-    GtkTextBuffer* buffer;
-    GtkWidget* tab_name;
+    gchar *filename;
+    gchar *contents;
+    GtkWidget *scrolled_win;
+    GtkWidget *view;
+    GtkTextBuffer *buffer;
+    GtkWidget *tab_name;
     GtkTextIter start, end;
-    GtkTextMark* mark;
-    GtkWidget* prompt_label;
-    GtkWidget* content_area;
+    GtkTextMark *mark;
+    GtkWidget *prompt_label;
+    GtkWidget *content_area;
 
     new_file_callback(NULL, meta_data);
 
-    current_page = gtk_notebook_get_n_pages(meta_data->notebook)-1;
+    current_page = gtk_notebook_get_n_pages(meta_data->notebook) - 1;
     scrolled_win = gtk_notebook_get_nth_page(meta_data->notebook, current_page);
     view = get_last_page_view(meta_data);
 
-    if(view != NULL)
+    if (view != NULL)
     {
         dialog = gtk_file_chooser_dialog_new("Open A File", NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, NULL);
 
@@ -143,53 +143,53 @@ void open_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
 
         switch (id)
         {
-            case GTK_RESPONSE_ACCEPT:
-                filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+        case GTK_RESPONSE_ACCEPT:
+            filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
 
-                buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
-                gtk_text_buffer_get_end_iter(buffer, &end);
-                offset = gtk_text_iter_get_offset(&end);
-                if (g_file_test(filename, G_FILE_TEST_EXISTS))
-                {
-                    g_file_get_contents(filename, &contents, NULL, NULL);
+            buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
+            gtk_text_buffer_get_end_iter(buffer, &end);
+            offset = gtk_text_iter_get_offset(&end);
+            if (g_file_test(filename, G_FILE_TEST_EXISTS))
+            {
+                g_file_get_contents(filename, &contents, NULL, NULL);
 
-                    gtk_source_buffer_begin_not_undoable_action(buffer);
-                    mark = gtk_text_buffer_get_insert(buffer);
-                    gtk_text_buffer_get_iter_at_mark(buffer, &start, mark);
+                gtk_source_buffer_begin_not_undoable_action(buffer);
+                mark = gtk_text_buffer_get_insert(buffer);
+                gtk_text_buffer_get_iter_at_mark(buffer, &start, mark);
 
-                    gtk_text_buffer_set_text(buffer, contents, -1);
+                gtk_text_buffer_set_text(buffer, contents, -1);
 
-                    gtk_label_set_text(GTK_LABEL(tab_name), basename(filename));
-                    set_page_filename(meta_data, gtk_notebook_get_n_pages(meta_data->notebook)-1, filename);
-                    switch_to_last_page(meta_data);
-                    GtkSourceLanguage* lang = gtk_source_language_manager_guess_language(meta_data->lang_manager, filename, NULL);
-                    if(lang!=NULL)
-                        meta_data->lang = lang;
-                    apply_language(meta_data);
+                gtk_label_set_text(GTK_LABEL(tab_name), basename(filename));
+                set_page_filename(meta_data, gtk_notebook_get_n_pages(meta_data->notebook) - 1, filename);
+                switch_to_last_page(meta_data);
+                GtkSourceLanguage *lang = gtk_source_language_manager_guess_language(meta_data->lang_manager, filename, NULL);
+                if (lang != NULL)
+                    meta_data->lang = lang;
+                apply_language(meta_data);
 
-                    gtk_source_buffer_end_not_undoable_action(buffer);
-                }
-                else
-                {
-                    error_dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,
-                                                     GTK_MESSAGE_ERROR,
-                                                     GTK_BUTTONS_OK, NULL);
+                gtk_source_buffer_end_not_undoable_action(buffer);
+            }
+            else
+            {
+                error_dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,
+                                                      GTK_MESSAGE_ERROR,
+                                                      GTK_BUTTONS_OK, NULL);
 
-                    gtk_dialog_run(GTK_DIALOG(error_dialog));
-                    gtk_widget_destroy(error_dialog);
-                }
-                break;
+                gtk_dialog_run(GTK_DIALOG(error_dialog));
+                gtk_widget_destroy(error_dialog);
+            }
+            break;
 
-            case GTK_RESPONSE_DELETE_EVENT:
-            case GTK_RESPONSE_REJECT:
-                close_file(meta_data, gtk_notebook_get_n_pages(meta_data->notebook)-1);
-                break;
+        case GTK_RESPONSE_DELETE_EVENT:
+        case GTK_RESPONSE_REJECT:
+            close_file(meta_data, gtk_notebook_get_n_pages(meta_data->notebook) - 1);
+            break;
         }
         gtk_widget_destroy(dialog);
     }
 }
 
-void close_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void close_file_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     gint current_page;
 
@@ -197,7 +197,7 @@ void close_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     close_file(meta_data, current_page);
 }
 
-void save_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void save_file_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     GtkWidget *dialog;
     GtkWidget *textview;
@@ -215,32 +215,32 @@ void save_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     textview = get_current_page_view(meta_data);
     tab_name = gtk_notebook_get_tab_label(meta_data->notebook, scrolled_win);
 
-    gchar* filename = (char*)malloc(sizeof(char)*255);
+    gchar *filename = (char *)malloc(sizeof(char) * 255);
     get_page_filename(meta_data, current_page, filename);
 
     if (strcmp(basename(filename), "Untitled") == 0)
     {
-        dialog = gtk_file_chooser_dialog_new("Save File", NULL, GTK_FILE_CHOOSER_ACTION_SAVE, GTK_STOCK_SAVE, GTK_RESPONSE_APPLY,GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
+        dialog = gtk_file_chooser_dialog_new("Save File", NULL, GTK_FILE_CHOOSER_ACTION_SAVE, GTK_STOCK_SAVE, GTK_RESPONSE_APPLY, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
         response = gtk_dialog_run(GTK_DIALOG(dialog));
-        switch(response)
+        switch (response)
         {
-            case GTK_RESPONSE_APPLY:
-                pathname = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
-                buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
-                gtk_text_buffer_get_bounds(buffer, &start, &end);
-                contents = gtk_text_buffer_get_text(buffer, &start, &end, FALSE);
-                g_file_set_contents(pathname, contents, -1, NULL);
-                set_page_filename(meta_data, current_page, pathname);
-                gtk_label_set_text(GTK_LABEL(tab_name), basename(pathname));
-                break;
-            case GTK_RESPONSE_CANCEL:
-                break;
+        case GTK_RESPONSE_APPLY:
+            pathname = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+            buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
+            gtk_text_buffer_get_bounds(buffer, &start, &end);
+            contents = gtk_text_buffer_get_text(buffer, &start, &end, FALSE);
+            g_file_set_contents(pathname, contents, -1, NULL);
+            set_page_filename(meta_data, current_page, pathname);
+            gtk_label_set_text(GTK_LABEL(tab_name), basename(pathname));
+            break;
+        case GTK_RESPONSE_CANCEL:
+            break;
         }
         gtk_widget_destroy(dialog);
     }
     else
     {
-        pathname = (char*)malloc(sizeof(char)*255);
+        pathname = (char *)malloc(sizeof(char) * 255);
         get_page_filename(meta_data, current_page, pathname);
 
         buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
@@ -253,7 +253,7 @@ void save_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     free(filename);
 }
 
-void save_as_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void save_as_file_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     GtkWidget *dialog;
     GtkWidget *textview;
@@ -271,27 +271,27 @@ void save_as_file_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     textview = get_current_page_view(meta_data);
     tab_label = gtk_notebook_get_tab_label(meta_data->notebook, scrolled_win);
 
-    dialog = gtk_file_chooser_dialog_new("Save File", NULL, GTK_FILE_CHOOSER_ACTION_SAVE, GTK_STOCK_SAVE, GTK_RESPONSE_APPLY,GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
+    dialog = gtk_file_chooser_dialog_new("Save File", NULL, GTK_FILE_CHOOSER_ACTION_SAVE, GTK_STOCK_SAVE, GTK_RESPONSE_APPLY, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
     response = gtk_dialog_run(GTK_DIALOG(dialog));
-    switch(response)
+    switch (response)
     {
-        case GTK_RESPONSE_APPLY:
-            filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
-            buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
-            gtk_text_buffer_get_bounds(buffer, &start, &end);
-            contents = gtk_text_buffer_get_text(buffer, &start, &end, FALSE);
-            g_file_set_contents(filename, contents, -1, NULL);
-            break;
-        case GTK_RESPONSE_CANCEL:
-            break;
+    case GTK_RESPONSE_APPLY:
+        filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+        buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
+        gtk_text_buffer_get_bounds(buffer, &start, &end);
+        contents = gtk_text_buffer_get_text(buffer, &start, &end, FALSE);
+        g_file_set_contents(filename, contents, -1, NULL);
+        break;
+    case GTK_RESPONSE_CANCEL:
+        break;
     }
     gtk_widget_destroy(dialog);
 }
 
-void font_settings_callback(GtkMenuItem* menu_item, MetaData* meta_data)
+void font_settings_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
-    GtkWidget* font_dialog;
-    gchar* fontname;
+    GtkWidget *font_dialog;
+    gchar *fontname;
     gchar curr_fontname[30];
     gint len;
     gint resp;
@@ -301,13 +301,13 @@ void font_settings_callback(GtkMenuItem* menu_item, MetaData* meta_data)
 
     strcpy(curr_fontname, pango_font_description_get_family(meta_data->font_desc));
     len = strlen(curr_fontname);
-    sprintf(curr_fontname+len, " %d", pango_font_description_get_size(meta_data->font_desc)/PANGO_SCALE);
+    sprintf(curr_fontname + len, " %d", pango_font_description_get_size(meta_data->font_desc) / PANGO_SCALE);
 
     gtk_font_selection_dialog_set_font_name(GTK_FONT_SELECTION_DIALOG(font_dialog), curr_fontname);
     gtk_font_selection_dialog_set_preview_text(GTK_FONT_SELECTION_DIALOG(font_dialog), "abcdefghijk ABCDEFHIJK");
     resp = gtk_dialog_run(GTK_DIALOG(font_dialog));
 
-    if(resp == GTK_RESPONSE_OK||resp == GTK_RESPONSE_APPLY)
+    if (resp == GTK_RESPONSE_OK || resp == GTK_RESPONSE_APPLY)
     {
         fontname = gtk_font_selection_dialog_get_font_name(GTK_FONT_SELECTION_DIALOG(font_dialog));
         meta_data->font_desc = pango_font_description_from_string(fontname);
@@ -318,48 +318,48 @@ void font_settings_callback(GtkMenuItem* menu_item, MetaData* meta_data)
     apply_font(meta_data);
 }
 
-void zoom_in_callback(GtkMenuItem* menu_item, MetaData* meta_data)
+void zoom_in_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     int curr_size = pango_font_description_get_size(meta_data->font_desc);
-    if(curr_size<18*PANGO_SCALE)
+    if (curr_size < 18 * PANGO_SCALE)
     {
-        curr_size+=PANGO_SCALE;
+        curr_size += PANGO_SCALE;
     }
-    else if(curr_size<28*PANGO_SCALE)
+    else if (curr_size < 28 * PANGO_SCALE)
     {
-        curr_size+=2*PANGO_SCALE;
+        curr_size += 2 * PANGO_SCALE;
     }
-    else if(curr_size<40*PANGO_SCALE)
+    else if (curr_size < 40 * PANGO_SCALE)
     {
-        curr_size+=4*PANGO_SCALE;
+        curr_size += 4 * PANGO_SCALE;
     }
-    else if(curr_size<72*PANGO_SCALE)
+    else if (curr_size < 72 * PANGO_SCALE)
     {
-        curr_size+=8*PANGO_SCALE;
+        curr_size += 8 * PANGO_SCALE;
     }
     pango_font_description_set_size(meta_data->font_desc, curr_size);
 
     apply_font(meta_data);
 }
 
-void zoom_out_callback(GtkMenuItem* menu_item, MetaData* meta_data)
+void zoom_out_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     int curr_size = pango_font_description_get_size(meta_data->font_desc);
-    if(curr_size<=18*PANGO_SCALE)
+    if (curr_size <= 18 * PANGO_SCALE)
     {
-        curr_size-=PANGO_SCALE;
+        curr_size -= PANGO_SCALE;
     }
-    else if(curr_size<=28*PANGO_SCALE)
+    else if (curr_size <= 28 * PANGO_SCALE)
     {
-        curr_size-=2*PANGO_SCALE;
+        curr_size -= 2 * PANGO_SCALE;
     }
-    else if(curr_size<=40*PANGO_SCALE)
+    else if (curr_size <= 40 * PANGO_SCALE)
     {
-        curr_size-=4*PANGO_SCALE;
+        curr_size -= 4 * PANGO_SCALE;
     }
-    else if(curr_size<=72*PANGO_SCALE)
+    else if (curr_size <= 72 * PANGO_SCALE)
     {
-        curr_size-=8*PANGO_SCALE;
+        curr_size -= 8 * PANGO_SCALE;
     }
     pango_font_description_set_size(meta_data->font_desc, curr_size);
 
@@ -371,222 +371,222 @@ void compilers_settings_callback()
     g_printf("%s\n", "compilers_settings_callback");
 }
 
-void highlighting_settings_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void highlighting_settings_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
-    const char* lang_code;
-    const char* label;
+    const char *lang_code;
+    const char *label;
     label = gtk_menu_item_get_label(menu_item);
 
-    if(strcmp(label, "Ada")==0)
+    if (strcmp(label, "Ada") == 0)
     {
-    	lang_code = "ada";
+        lang_code = "ada";
     }
-    if(strcmp(label, "Cg")==0)
+    if (strcmp(label, "Cg") == 0)
     {
-    	lang_code = "cg";
+        lang_code = "cg";
     }
-    if(strcmp(label, "C")==0)
+    if (strcmp(label, "C") == 0)
     {
-    	lang_code = "c";
+        lang_code = "c";
     }
-    if(strcmp(label, "C++")==0)
+    if (strcmp(label, "C++") == 0)
     {
-    	lang_code = "cpp";
+        lang_code = "cpp";
     }
-    if(strcmp(label, "C#")==0)
+    if (strcmp(label, "C#") == 0)
     {
-    	lang_code = "csharp";
+        lang_code = "csharp";
     }
-    if(strcmp(label, "Cmake")==0)
+    if (strcmp(label, "Cmake") == 0)
     {
-    	lang_code = "cmake";
+        lang_code = "cmake";
     }
-    if(strcmp(label, "Cobol")==0)
+    if (strcmp(label, "Cobol") == 0)
     {
-    	lang_code = "cobol";
+        lang_code = "cobol";
     }
-    if(strcmp(label, "Css")==0)
+    if (strcmp(label, "Css") == 0)
     {
-    	lang_code = "css";
+        lang_code = "css";
     }
-    if(strcmp(label, "Cuda")==0)
+    if (strcmp(label, "Cuda") == 0)
     {
-    	lang_code = "cuda";
+        lang_code = "cuda";
     }
-    if(strcmp(label, "Eiffel")==0)
+    if (strcmp(label, "Eiffel") == 0)
     {
-    	lang_code = "eiffel";
+        lang_code = "eiffel";
     }
-    if(strcmp(label, "Fortran")==0)
+    if (strcmp(label, "Fortran") == 0)
     {
-    	lang_code = "fortran";
+        lang_code = "fortran";
     }
-    if(strcmp(label, "F#")==0)
+    if (strcmp(label, "F#") == 0)
     {
-    	lang_code = "fsharp";
+        lang_code = "fsharp";
     }
-    if(strcmp(label, "GLSL")==0)
+    if (strcmp(label, "GLSL") == 0)
     {
-    	lang_code = "glsl";
+        lang_code = "glsl";
     }
-    if(strcmp(label, "Go")==0)
+    if (strcmp(label, "Go") == 0)
     {
-    	lang_code = "go";
+        lang_code = "go";
     }
-    if(strcmp(label, "Groovy")==0)
+    if (strcmp(label, "Groovy") == 0)
     {
-    	lang_code = "groovy";
+        lang_code = "groovy";
     }
-    if(strcmp(label, "Haskell")==0)
+    if (strcmp(label, "Haskell") == 0)
     {
-    	lang_code = "haskell";
+        lang_code = "haskell";
     }
-    if(strcmp(label, "HTML")==0)
+    if (strcmp(label, "HTML") == 0)
     {
-    	lang_code = "html";
+        lang_code = "html";
     }
-    if(strcmp(label, "Java")==0)
+    if (strcmp(label, "Java") == 0)
     {
-    	lang_code = "java";
+        lang_code = "java";
     }
-    if(strcmp(label, "JavaScript")==0)
+    if (strcmp(label, "JavaScript") == 0)
     {
-    	lang_code = "js";
+        lang_code = "js";
     }
-    if(strcmp(label, "Julia")==0)
+    if (strcmp(label, "Julia") == 0)
     {
-    	lang_code = "julia";
+        lang_code = "julia";
     }
-    if(strcmp(label, "Kotlin")==0)
+    if (strcmp(label, "Kotlin") == 0)
     {
-    	lang_code = "kotlin";
+        lang_code = "kotlin";
     }
-    if(strcmp(label, "LaTeX")==0)
+    if (strcmp(label, "LaTeX") == 0)
     {
-    	lang_code = "latex";
+        lang_code = "latex";
     }
-    if(strcmp(label, "Lua")==0)
+    if (strcmp(label, "Lua") == 0)
     {
-    	lang_code = "lua";
+        lang_code = "lua";
     }
-    if(strcmp(label, "Makefile")==0)
+    if (strcmp(label, "Makefile") == 0)
     {
-    	lang_code = "makefile";
+        lang_code = "makefile";
     }
-    if(strcmp(label, "Meson")==0)
+    if (strcmp(label, "Meson") == 0)
     {
-    	lang_code = "meson";
+        lang_code = "meson";
     }
-    if(strcmp(label, "OCaml")==0)
+    if (strcmp(label, "OCaml") == 0)
     {
-    	lang_code = "ocaml";
+        lang_code = "ocaml";
     }
-    if(strcmp(label, "OpenCL")==0)
+    if (strcmp(label, "OpenCL") == 0)
     {
-    	lang_code = "opencl";
+        lang_code = "opencl";
     }
-    if(strcmp(label, "Pascal")==0)
+    if (strcmp(label, "Pascal") == 0)
     {
-    	lang_code = "pascal";
+        lang_code = "pascal";
     }
-    if(strcmp(label, "Perl")==0)
+    if (strcmp(label, "Perl") == 0)
     {
-    	lang_code = "perl";
+        lang_code = "perl";
     }
-    if(strcmp(label, "PHP")==0)
+    if (strcmp(label, "PHP") == 0)
     {
-    	lang_code = "php";
+        lang_code = "php";
     }
-    if(strcmp(label, "Python")==0)
+    if (strcmp(label, "Python") == 0)
     {
-    	lang_code = "python3";
+        lang_code = "python3";
     }
-    if(strcmp(label, "R")==0)
+    if (strcmp(label, "R") == 0)
     {
-    	lang_code = "r";
+        lang_code = "r";
     }
-    if(strcmp(label, "Ruby")==0)
+    if (strcmp(label, "Ruby") == 0)
     {
-    	lang_code = "ruby";
+        lang_code = "ruby";
     }
-    if(strcmp(label, "Rust")==0)
+    if (strcmp(label, "Rust") == 0)
     {
-    	lang_code = "rust";
+        lang_code = "rust";
     }
-    if(strcmp(label, "Scala")==0)
+    if (strcmp(label, "Scala") == 0)
     {
-    	lang_code = "scala";
+        lang_code = "scala";
     }
-    if(strcmp(label, "Bourne Shell")==0)
+    if (strcmp(label, "Bourne Shell") == 0)
     {
-    	lang_code = "sh";
+        lang_code = "sh";
     }
-    if(strcmp(label, "SQL")==0)
+    if (strcmp(label, "SQL") == 0)
     {
-    	lang_code = "sql";
+        lang_code = "sql";
     }
-    if(strcmp(label, "Swift")==0)
+    if (strcmp(label, "Swift") == 0)
     {
-    	lang_code = "swift";
+        lang_code = "swift";
     }
-    if(strcmp(label, "Vala")==0)
+    if (strcmp(label, "Vala") == 0)
     {
-    	lang_code = "vala";
+        lang_code = "vala";
     }
-    if(strcmp(label, "Verilog")==0)
+    if (strcmp(label, "Verilog") == 0)
     {
-    	lang_code = "verilog";
+        lang_code = "verilog";
     }
-    if(strcmp(label, "VHDL")==0)
+    if (strcmp(label, "VHDL") == 0)
     {
-    	lang_code = "vhdl";
+        lang_code = "vhdl";
     }
-    if(strcmp(label, "XML")==0)
+    if (strcmp(label, "XML") == 0)
     {
-    	lang_code = "xml";
+        lang_code = "xml";
     }
-    if(strcmp(label, "YAML")==0)
+    if (strcmp(label, "YAML") == 0)
     {
-    	lang_code = "yaml";
+        lang_code = "yaml";
     }
     g_printf("%s\n", lang_code);
     meta_data->lang = gtk_source_language_manager_get_language(GTK_SOURCE_LANGUAGE_MANAGER(meta_data->lang_manager), lang_code);
     apply_language(meta_data);
 }
 
-void scheme_settings_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void scheme_settings_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
-    const char* scheme_code;
-    const char* label;
+    const char *scheme_code;
+    const char *label;
     label = gtk_menu_item_get_label(menu_item);
 
-    if(strcmp(label, "Classic")==0)
+    if (strcmp(label, "Classic") == 0)
     {
-    	scheme_code = "classic";
+        scheme_code = "classic";
     }
-    if(strcmp(label, "Cobalt")==0)
+    if (strcmp(label, "Cobalt") == 0)
     {
-    	scheme_code = "cobalt";
+        scheme_code = "cobalt";
     }
-    if(strcmp(label, "Kate")==0)
+    if (strcmp(label, "Kate") == 0)
     {
-    	scheme_code = "kate";
+        scheme_code = "kate";
     }
-    if(strcmp(label, "Oblivion")==0)
+    if (strcmp(label, "Oblivion") == 0)
     {
-    	scheme_code = "oblivion";
+        scheme_code = "oblivion";
     }
-    if(strcmp(label, "Solarized-Light")==0)
+    if (strcmp(label, "Solarized-Light") == 0)
     {
-    	scheme_code = "solarized-light";
+        scheme_code = "solarized-light";
     }
-    if(strcmp(label, "Solarized-Dark")==0)
+    if (strcmp(label, "Solarized-Dark") == 0)
     {
-    	scheme_code = "solarized-dark";
+        scheme_code = "solarized-dark";
     }
-    if(strcmp(label, "Tango")==0)
+    if (strcmp(label, "Tango") == 0)
     {
-    	scheme_code = "tango";
+        scheme_code = "tango";
     }
 
     g_printf("%s\n", scheme_code);
@@ -594,60 +594,10 @@ void scheme_settings_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     apply_scheme(meta_data);
 }
 
-void shell_settings_callback(GtkMenuItem *menu_item, MetaData* meta_data)
-{
-    GtkWidget* box;
-    GtkWidget* terminal;
-    GtkWidget* statusbox;
-    GtkWidget* statusbar_shell;
-    GList* box_children;
-    gint current_page;
-
-    current_page = gtk_notebook_get_current_page(meta_data->notebook);
-    box = gtk_notebook_get_nth_page(meta_data->notebook, current_page);
-    box_children = gtk_container_get_children(GTK_CONTAINER(box));
-    box_children = box_children->next;
-    terminal = box_children->data;
-    box_children = box_children->next;
-    statusbox = box_children->data;
-    box_children = gtk_container_get_children(GTK_CONTAINER(statusbox));
-    box_children = box_children->next;
-    statusbar_shell = box_children->data;
-
-    const char* shell_path;
-    const char* label;
-    label = gtk_menu_item_get_label(menu_item);
-
-    if(strcmp(label, "Bourne shell")==0)
-    {
-    	shell_path = "/bin/sh\n";
-    }
-    if(strcmp(label, "Bourne-Again shell")==0)
-    {
-    	shell_path = "/bin/bash\n";
-    }
-    if(strcmp(label, "Koch shell")==0)
-    {
-    	shell_path = "/bin/ksh\n";
-    }
-    if(strcmp(label, "Debian Almquist shell")==0)
-    {
-    	shell_path = "/bin/dash\n";
-    }
-
-    gtk_statusbar_pop(statusbar_shell, 0);
-    gchar* shell_msg = g_strdup_printf("Shell: %s", label);
-    gtk_statusbar_push(statusbar_shell, 0, shell_msg);
-    g_free(shell_msg);
-
-    vte_terminal_feed_child(terminal, shell_path, strlen(shell_path));
-    vte_terminal_feed_child(terminal, "clear\n", 7);
-}
-
-void undo_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void undo_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     GtkTextBuffer *buffer;
-    GtkClipboard* clipboard;
+    GtkClipboard *clipboard;
 
     clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
 
@@ -656,10 +606,10 @@ void undo_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     gtk_source_buffer_undo(buffer);
 }
 
-void redo_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void redo_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     GtkTextBuffer *buffer;
-    GtkClipboard* clipboard;
+    GtkClipboard *clipboard;
 
     clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
 
@@ -668,10 +618,10 @@ void redo_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     gtk_source_buffer_redo(buffer);
 }
 
-void cut_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void cut_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     GtkTextBuffer *buffer;
-    GtkClipboard* clipboard;
+    GtkClipboard *clipboard;
 
     clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
 
@@ -680,10 +630,10 @@ void cut_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     gtk_text_buffer_cut_clipboard(buffer, clipboard, TRUE);
 }
 
-void copy_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void copy_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     GtkTextBuffer *buffer;
-    GtkClipboard* clipboard;
+    GtkClipboard *clipboard;
 
     clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
 
@@ -692,10 +642,10 @@ void copy_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     gtk_text_buffer_copy_clipboard(buffer, clipboard);
 }
 
-void paste_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void paste_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     GtkTextBuffer *buffer;
-    GtkClipboard* clipboard;
+    GtkClipboard *clipboard;
 
     clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
 
@@ -704,38 +654,38 @@ void paste_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     gtk_text_buffer_paste_clipboard(buffer, clipboard, NULL, TRUE);
 }
 
-void comment_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void comment_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     GtkSourceBuffer *buffer;
-    GtkClipboard* clipboard;
-    GtkTextMark* selection;
+    GtkClipboard *clipboard;
+    GtkTextMark *selection;
     GtkTextIter begI, endI;
-    gchar* comment;
+    gchar *comment;
 
-    comment = (gchar*)malloc(sizeof(gchar)*30);
+    comment = (gchar *)malloc(sizeof(gchar) * 30);
     calc_lang_comment(meta_data, comment);
     buffer = get_current_page_buffer(meta_data);
 
-    GtkTextMark* begM = gtk_text_buffer_get_mark(buffer, "insert");
-    GtkTextMark* endM = gtk_text_buffer_get_mark(buffer, "selection_bound");
+    GtkTextMark *begM = gtk_text_buffer_get_mark(buffer, "insert");
+    GtkTextMark *endM = gtk_text_buffer_get_mark(buffer, "selection_bound");
 
     clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
 
     gtk_text_buffer_get_iter_at_mark(buffer, &begI, begM);
     gtk_text_buffer_get_iter_at_mark(buffer, &endI, endM);
 
-    if(gtk_text_iter_get_line(&begI)>gtk_text_iter_get_line(&endI))
+    if (gtk_text_iter_get_line(&begI) > gtk_text_iter_get_line(&endI))
     {
         GtkTextIter temp = begI;
         begI = endI;
         endI = temp;
 
-        GtkTextMark* tM = begM;
+        GtkTextMark *tM = begM;
         begM = endM;
         endM = tM;
     }
 
-    while(gtk_text_iter_get_line(&begI)!=gtk_text_iter_get_line(&endI))
+    while (gtk_text_iter_get_line(&begI) != gtk_text_iter_get_line(&endI))
     {
         gtk_text_buffer_insert(buffer, &begI, comment, strlen(comment));
         gtk_text_iter_forward_line(&begI);
@@ -748,18 +698,18 @@ void comment_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     gtk_text_buffer_insert(buffer, &begI, comment, strlen(comment));
 }
 
-void uncomment_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void uncomment_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     g_printf("%s\n", "uncomment_callback");
 }
 
-void insert_date_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void insert_date_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     GtkSourceBuffer *buffer;
-    GtkClipboard* clipboard;
-    GtkTextMark* insertMark;
+    GtkClipboard *clipboard;
+    GtkTextMark *insertMark;
     GtkTextIter iter;
-    gchar* date = (gchar*)malloc(256*sizeof(gchar));
+    gchar *date = (gchar *)malloc(256 * sizeof(gchar));
 
     calc_date(date);
 
@@ -770,44 +720,44 @@ void insert_date_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     gtk_text_buffer_insert(buffer, &iter, date, strlen(date));
 }
 
-void justify_menu_callback(GtkMenuItem* item, MetaData* meta_data)
+void justify_menu_callback(GtkMenuItem *item, MetaData *meta_data)
 {
-    if(strcmp(gtk_menu_item_get_label(item), "Align Left") == 0)
+    if (strcmp(gtk_menu_item_get_label(item), "Align Left") == 0)
         meta_data->justify = GTK_JUSTIFY_LEFT;
-    if(strcmp(gtk_menu_item_get_label(item), "Align Center") == 0)
+    if (strcmp(gtk_menu_item_get_label(item), "Align Center") == 0)
         meta_data->justify = GTK_JUSTIFY_CENTER;
-    if(strcmp(gtk_menu_item_get_label(item), "Align Right") == 0)
+    if (strcmp(gtk_menu_item_get_label(item), "Align Right") == 0)
         meta_data->justify = GTK_JUSTIFY_RIGHT;
-    if(strcmp(gtk_menu_item_get_label(item), "Align Fill") == 0)
+    if (strcmp(gtk_menu_item_get_label(item), "Align Fill") == 0)
         meta_data->justify = GTK_JUSTIFY_FILL;
     apply_specification(meta_data);
 }
 
-void format_callback(GtkMenuItem* item, MetaData* meta_data)
+void format_callback(GtkMenuItem *item, MetaData *meta_data)
 {
-    if(strcmp(gtk_menu_item_get_label(item), "Enable Auto-Indent") == 0)
+    if (strcmp(gtk_menu_item_get_label(item), "Enable Auto-Indent") == 0)
     {
         meta_data->auto_indent = !meta_data->auto_indent;
     }
-    if(strcmp(gtk_menu_item_get_label(item), "Insert spaces instead of tabs") == 0)
+    if (strcmp(gtk_menu_item_get_label(item), "Insert spaces instead of tabs") == 0)
     {
         meta_data->space_tabs = !meta_data->space_tabs;
     }
-    if(strcmp(gtk_menu_item_get_label(item), "Highlight current line") == 0)
+    if (strcmp(gtk_menu_item_get_label(item), "Highlight current line") == 0)
     {
         meta_data->highlight_line = !meta_data->highlight_line;
     }
-    if(strcmp(gtk_menu_item_get_label(item), "Display line numbers") == 0)
+    if (strcmp(gtk_menu_item_get_label(item), "Display line numbers") == 0)
     {
         meta_data->line_numbers = !meta_data->line_numbers;
     }
-    if(strcmp(gtk_menu_item_get_label(item), "Display spaces as symbols") == 0)
+    if (strcmp(gtk_menu_item_get_label(item), "Display spaces as symbols") == 0)
     {
         meta_data->visualize_spaces = !meta_data->visualize_spaces;
     }
-    if(strcmp(gtk_menu_item_get_label(item), "Text wrapping") == 0)
+    if (strcmp(gtk_menu_item_get_label(item), "Text wrapping") == 0)
     {
-        if(meta_data->wrap_mode==GTK_WRAP_NONE)
+        if (meta_data->wrap_mode == GTK_WRAP_NONE)
             meta_data->wrap_mode = GTK_WRAP_WORD_CHAR;
         else
             meta_data->wrap_mode = GTK_WRAP_NONE;
@@ -815,29 +765,29 @@ void format_callback(GtkMenuItem* item, MetaData* meta_data)
     apply_format_prefs(meta_data);
 }
 
-void switch_case_sense_callback(GtkCheckButton* case_sense_btn, MetaData* meta_data)
+void switch_case_sense_callback(GtkCheckButton *case_sense_btn, MetaData *meta_data)
 {
-    meta_data->case_sense_option = gtk_toggle_button_get_active((GtkToggleButton*)case_sense_btn);
+    meta_data->case_sense_option = gtk_toggle_button_get_active((GtkToggleButton *)case_sense_btn);
 }
 
-void cancel_file_dlg_callback(GtkWidget* widget, MetaData* meta_data)
+void cancel_file_dlg_callback(GtkWidget *widget, MetaData *meta_data)
 {
     gtk_window_close(meta_data->dial_data->dialog);
-    //free(meta_data->dial_data);
+    // free(meta_data->dial_data);
 }
 
-void forward_file_dlg_callback(GtkWidget* widget, MetaData* meta_data)
+void forward_file_dlg_callback(GtkWidget *widget, MetaData *meta_data)
 {
-    FindDialog* dial_data = meta_data->dial_data;
+    FindDialog *dial_data = meta_data->dial_data;
     add_find_entry(meta_data, dial_data);
-    gchar* search_text;
+    gchar *search_text;
     GtkTextSearchFlags flags;
-    GtkSourceView* text_view;
-    GtkSourceBuffer* buffer;
-    GtkTextMark* endM;
+    GtkSourceView *text_view;
+    GtkSourceBuffer *buffer;
+    GtkTextMark *endM;
     GtkTextIter sel_iter, begI, endI;
 
-    if(!meta_data->case_sense_option)
+    if (!meta_data->case_sense_option)
         flags = GTK_TEXT_SEARCH_CASE_INSENSITIVE;
     search_text = gtk_combo_box_text_get_active_text(dial_data->text_entry);
     text_view = get_current_page_view(meta_data);
@@ -846,17 +796,17 @@ void forward_file_dlg_callback(GtkWidget* widget, MetaData* meta_data)
     endM = gtk_text_buffer_get_mark(buffer, "selection_bound");
     gtk_text_buffer_get_iter_at_mark(buffer, &sel_iter, endM);
 
-    if(gtk_text_iter_forward_search(&sel_iter, search_text, flags, &begI, &endI, NULL))
+    if (gtk_text_iter_forward_search(&sel_iter, search_text, flags, &begI, &endI, NULL))
     {
         gtk_text_buffer_select_range(buffer, &begI, &endI);
-        GtkTextMark* new_pos = gtk_text_buffer_get_mark(buffer, "selection_bound");
+        GtkTextMark *new_pos = gtk_text_buffer_get_mark(buffer, "selection_bound");
         gtk_text_view_scroll_to_mark(text_view, new_pos, 0.0, 1, 0.0, 0.5);
     }
     else
     {
-        if(gtk_text_iter_get_offset(&sel_iter)==0)
+        if (gtk_text_iter_get_offset(&sel_iter) == 0)
         {
-            gchar* msg = g_strdup_printf("Not found:\"%s\"", search_text);
+            gchar *msg = g_strdup_printf("Not found:\"%s\"", search_text);
             display_error_message(meta_data, msg);
             g_free(msg);
             return;
@@ -868,18 +818,18 @@ void forward_file_dlg_callback(GtkWidget* widget, MetaData* meta_data)
     }
 }
 
-void backward_file_dlg_callback(GtkWidget* widget, MetaData* meta_data)
+void backward_file_dlg_callback(GtkWidget *widget, MetaData *meta_data)
 {
-    FindDialog* dial_data = meta_data->dial_data;
+    FindDialog *dial_data = meta_data->dial_data;
     add_find_entry(meta_data, dial_data);
-    gchar* search_text;
+    gchar *search_text;
     GtkTextSearchFlags flags;
-    GtkSourceView* text_view;
-    GtkSourceBuffer* buffer;
-    GtkTextMark* begM;
+    GtkSourceView *text_view;
+    GtkSourceBuffer *buffer;
+    GtkTextMark *begM;
     GtkTextIter ins_iter, begI, endI;
 
-    if(!meta_data->case_sense_option)
+    if (!meta_data->case_sense_option)
         flags = GTK_TEXT_SEARCH_CASE_INSENSITIVE;
     search_text = gtk_combo_box_text_get_active_text(dial_data->text_entry);
     text_view = get_current_page_view(meta_data);
@@ -888,19 +838,19 @@ void backward_file_dlg_callback(GtkWidget* widget, MetaData* meta_data)
     begM = gtk_text_buffer_get_mark(buffer, "insert");
     gtk_text_buffer_get_iter_at_mark(buffer, &ins_iter, begM);
 
-    if(gtk_text_iter_backward_search(&ins_iter, search_text, flags, &begI, &endI, NULL))
+    if (gtk_text_iter_backward_search(&ins_iter, search_text, flags, &begI, &endI, NULL))
     {
         gtk_text_buffer_select_range(buffer, &begI, &endI);
-        GtkTextMark* new_pos = gtk_text_buffer_get_mark(buffer, "insert");
+        GtkTextMark *new_pos = gtk_text_buffer_get_mark(buffer, "insert");
         gtk_text_view_scroll_to_mark(text_view, new_pos, 0.0, 1, 0.0, 0.5);
     }
     else
     {
         GtkTextIter end;
         gtk_text_buffer_get_end_iter(buffer, &end);
-        if(gtk_text_iter_get_offset(&ins_iter)==gtk_text_iter_get_offset(&end))
+        if (gtk_text_iter_get_offset(&ins_iter) == gtk_text_iter_get_offset(&end))
         {
-            gchar* msg = g_strdup_printf("Not found:\"%s\"", search_text);
+            gchar *msg = g_strdup_printf("Not found:\"%s\"", search_text);
             display_error_message(meta_data, msg);
             g_free(msg);
             return;
@@ -910,54 +860,54 @@ void backward_file_dlg_callback(GtkWidget* widget, MetaData* meta_data)
     }
 }
 
-void find_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void find_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
-    FindDialog* dial_data = (FindDialog*)malloc(sizeof(FindDialog));
+    FindDialog *dial_data = (FindDialog *)malloc(sizeof(FindDialog));
     create_find_dlg(meta_data, dial_data);
 
-    GtkSourceBuffer* buffer = get_current_page_buffer(meta_data);
+    GtkSourceBuffer *buffer = get_current_page_buffer(meta_data);
     GtkTextIter home;
     gtk_text_buffer_get_iter_at_offset(buffer, &home, 0);
     gtk_text_buffer_place_cursor(buffer, &home);
 
-    g_signal_connect (dial_data->dialog, "destroy",
-		      G_CALLBACK (cancel_file_dlg_callback), meta_data);
+    g_signal_connect(dial_data->dialog, "destroy",
+                     G_CALLBACK(cancel_file_dlg_callback), meta_data);
 
-    g_signal_connect (dial_data->case_sense_chk, "toggled",
-                      G_CALLBACK (switch_case_sense_callback), meta_data);
+    g_signal_connect(dial_data->case_sense_chk, "toggled",
+                     G_CALLBACK(switch_case_sense_callback), meta_data);
 
-    g_signal_connect (dial_data->backward_btn, "clicked",
-                      G_CALLBACK (backward_file_dlg_callback), meta_data);
+    g_signal_connect(dial_data->backward_btn, "clicked",
+                     G_CALLBACK(backward_file_dlg_callback), meta_data);
 
-    g_signal_connect (dial_data->forward_btn, "clicked",
-                      G_CALLBACK (forward_file_dlg_callback), meta_data);
+    g_signal_connect(dial_data->forward_btn, "clicked",
+                     G_CALLBACK(forward_file_dlg_callback), meta_data);
 
-    g_signal_connect (dial_data->cancel_btn, "clicked",
-                      G_CALLBACK (cancel_file_dlg_callback), meta_data);
+    g_signal_connect(dial_data->cancel_btn, "clicked",
+                     G_CALLBACK(cancel_file_dlg_callback), meta_data);
 
-    //g_signal_connect (dial_data->text_entry, "changed",
-    //                  G_CALLBACK (dummy_callback), meta_data);
+    // g_signal_connect (dial_data->text_entry, "changed",
+    //                   G_CALLBACK (dummy_callback), meta_data);
 
-    //g_signal_connect (app->findrepwin, "key_press_event",
-    //                  G_CALLBACK (on_fr_keypress), meta_data);
+    // g_signal_connect (app->findrepwin, "key_press_event",
+    //                   G_CALLBACK (on_fr_keypress), meta_data);
 
-    gtk_widget_show (dial_data->dialog);
+    gtk_widget_show(dial_data->dialog);
 }
 
-void replace_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void replace_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     g_printf("%s\n", "replace_callback");
 }
 
-void goto_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void goto_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
-    GtkWidget* label;
-    gchar* label_text;
-    GtkWidget* entry;
-    GtkWidget* separator;
+    GtkWidget *label;
+    gchar *label_text;
+    GtkWidget *entry;
+    GtkWidget *separator;
     guint dest_line;
 
-    GtkWidget* buffer = get_current_page_buffer(meta_data);
+    GtkWidget *buffer = get_current_page_buffer(meta_data);
     gint lines = gtk_text_buffer_get_line_count(buffer);
 
     label_text = g_strdup_printf("Line (1 - %d): ", lines);
@@ -967,34 +917,34 @@ void goto_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     entry = gtk_entry_new();
     separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
 
-    GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT|GTK_DIALOG_MODAL;
-    GtkWidget* goto_dialog = gtk_dialog_new_with_buttons("Go to Line", meta_data->window,
+    GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
+    GtkWidget *goto_dialog = gtk_dialog_new_with_buttons("Go to Line", meta_data->window,
                                                          flags,
                                                          GTK_STOCK_OK,
                                                          GTK_RESPONSE_OK,
                                                          GTK_STOCK_CANCEL,
                                                          GTK_RESPONSE_REJECT,
                                                          NULL);
-    GtkWidget* content_area = gtk_dialog_get_content_area(goto_dialog);
+    GtkWidget *content_area = gtk_dialog_get_content_area(goto_dialog);
     gtk_box_set_spacing(GTK_BOX(content_area), 8);
     gtk_box_pack_start(GTK_BOX(content_area), label, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(content_area), entry, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(content_area), separator, TRUE, TRUE, 0);
-    gtk_widget_show_all (goto_dialog);
+    gtk_widget_show_all(goto_dialog);
 
     gint response = gtk_dialog_run(goto_dialog);
     GtkTextIter iter;
-    GtkTextMark* last_pos;
-    GtkWidget* text_view = get_current_page_view(meta_data);
-    switch(response)
+    GtkTextMark *last_pos;
+    GtkWidget *text_view = get_current_page_view(meta_data);
+    switch (response)
     {
     case GTK_RESPONSE_OK:
         dest_line = strtoul(gtk_entry_get_text(entry), NULL, 0);
-        if(dest_line>0&&dest_line<=lines)
+        if (dest_line > 0 && dest_line <= lines)
         {
-            gtk_text_buffer_get_iter_at_line(buffer, &iter, dest_line-1);
+            gtk_text_buffer_get_iter_at_line(buffer, &iter, dest_line - 1);
             gtk_text_buffer_place_cursor(buffer, &iter);
-            last_pos = gtk_text_buffer_create_mark (buffer, "last_pos", &iter, FALSE);
+            last_pos = gtk_text_buffer_create_mark(buffer, "last_pos", &iter, FALSE);
             gtk_text_view_scroll_to_mark(text_view, last_pos, 0.0, 1, 0.0, 0.5);
             gtk_text_buffer_delete_mark(buffer, last_pos);
         }
@@ -1007,13 +957,13 @@ void goto_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     g_free(label_text);
 }
 
-gboolean compile_callback(GObject* menu_item, MetaData* meta_data)
+gboolean compile_callback(GObject *menu_item, MetaData *meta_data)
 {
-    GtkWidget* terminal;
-    GtkWidget* box;
-    GList* box_children;
-    gchar* filename;
-    gchar* command;
+    GtkWidget *terminal;
+    GtkWidget *box;
+    GList *box_children;
+    gchar *filename;
+    gchar *command;
     gint curr_page;
     gboolean success = TRUE;
 
@@ -1023,15 +973,15 @@ gboolean compile_callback(GObject* menu_item, MetaData* meta_data)
     box_children = box_children->next;
     terminal = box_children->data;
 
-    filename = (gchar*)malloc(sizeof(gchar)*255);
-    command = (gchar*)malloc(sizeof(gchar)*4096);
+    filename = (gchar *)malloc(sizeof(gchar) * 255);
+    command = (gchar *)malloc(sizeof(gchar) * 4096);
     get_page_filename(meta_data, curr_page, filename);
 
-    const gchar* tab_name = gtk_notebook_get_tab_label_text(meta_data->notebook, box);
+    const gchar *tab_name = gtk_notebook_get_tab_label_text(meta_data->notebook, box);
 
-    if(strcmp(filename, "Untitled")==0||tab_name[0]=='*')
+    if (strcmp(filename, "Untitled") == 0 || tab_name[0] == '*')
     {
-        gchar* msg = g_strdup("File is not saved");
+        gchar *msg = g_strdup("File is not saved");
         display_error_message(meta_data, msg);
         success = FALSE;
         g_free(msg);
@@ -1047,13 +997,13 @@ gboolean compile_callback(GObject* menu_item, MetaData* meta_data)
     return success;
 }
 
-void run_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void run_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
-    GtkWidget* terminal;
-    GtkWidget* box;
-    GList* box_children;
-    gchar* filename;
-    gchar* command;
+    GtkWidget *terminal;
+    GtkWidget *box;
+    GList *box_children;
+    gchar *filename;
+    gchar *command;
     gint curr_page;
 
     printf("%d\n", meta_data->notebook);
@@ -1064,20 +1014,20 @@ void run_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     box_children = box_children->next;
     terminal = box_children->data;
 
-    filename = (gchar*)malloc(sizeof(gchar)*255);
-    command = (gchar*)malloc(sizeof(gchar)*4096);
+    filename = (gchar *)malloc(sizeof(gchar) * 255);
+    command = (gchar *)malloc(sizeof(gchar) * 4096);
     get_page_filename(meta_data, curr_page, filename);
 
-    if(strcmp(filename, "Untitled")==0)
+    if (strcmp(filename, "Untitled") == 0)
     {
         GtkDialogFlags flags = GTK_DIALOG_MODAL;
-        GtkWidget* dialog = gtk_message_dialog_new (meta_data->window,
-                                  flags,
-                                  GTK_MESSAGE_ERROR,
-                                  GTK_BUTTONS_CLOSE,
-                                  "File is not saved:");
-        gtk_dialog_run (GTK_DIALOG (dialog));
-        gtk_widget_destroy (dialog);
+        GtkWidget *dialog = gtk_message_dialog_new(meta_data->window,
+                                                   flags,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "File is not saved:");
+        gtk_dialog_run(GTK_DIALOG(dialog));
+        gtk_widget_destroy(dialog);
     }
     else
     {
@@ -1091,9 +1041,9 @@ void run_callback(GtkMenuItem *menu_item, MetaData* meta_data)
     free(command);
 }
 
-void compile_and_run_callback(GtkMenuItem *menu_item, MetaData* meta_data)
+void compile_and_run_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
-    if(compile_callback(menu_item, meta_data))
+    if (compile_callback(menu_item, meta_data))
     {
         run_callback(menu_item, meta_data);
     }
@@ -1101,19 +1051,19 @@ void compile_and_run_callback(GtkMenuItem *menu_item, MetaData* meta_data)
 
 void about_callback(GtkMenuItem *menu_item, GtkWindow *parent_window)
 {
-    const char *authors[] = {"Farididdin Rakhimov", NULL };
+    const char *authors[] = {"Farididdin Rakhimov", NULL};
 
     gtk_show_about_dialog(parent_window,
-                         "program-name", "Code Scribe",
-                         "authors", authors,
-                         "license", "GNU General Public License",
-                         "comments", "A GTK+ based code editor with online codebase",
-                         NULL);
+                          "program-name", "Code Scribe",
+                          "authors", authors,
+                          "license", "GNU General Public License",
+                          "comments", "A GTK+ based code editor with online codebase",
+                          NULL);
 }
 
-void update_statusbar_col_lines(GtkSourceBuffer *buffer, GtkStatusbar  *statusbar)
+void update_statusbar_col_lines(GtkSourceBuffer *buffer, GtkStatusbar *statusbar)
 {
-    gchar* posititon_msg;
+    gchar *posititon_msg;
     gint row, col, pos;
     GtkTextIter iter;
 
@@ -1125,17 +1075,17 @@ void update_statusbar_col_lines(GtkSourceBuffer *buffer, GtkStatusbar  *statusba
     col = gtk_text_iter_get_line_offset(&iter);
     pos = gtk_text_iter_get_offset(&iter);
 
-    posititon_msg = g_strdup_printf("Line %d,   Col %d,   Pos %d", row+1, col+1, pos+1);
+    posititon_msg = g_strdup_printf("Line %d,   Col %d,   Pos %d", row + 1, col + 1, pos + 1);
 
     gtk_statusbar_push(statusbar, 0, posititon_msg);
 
     g_free(posititon_msg);
 }
 
-void update_statusbar_language(GtkSourceBuffer *buffer, GtkStatusbar  *statusbar)
+void update_statusbar_language(GtkSourceBuffer *buffer, GtkStatusbar *statusbar)
 {
-    gchar* language_msg;
-    GtkSourceLanguage* lang = gtk_source_buffer_get_language(buffer);
+    gchar *language_msg;
+    GtkSourceLanguage *lang = gtk_source_buffer_get_language(buffer);
 
     gtk_statusbar_pop(statusbar, 0);
 
@@ -1146,12 +1096,12 @@ void update_statusbar_language(GtkSourceBuffer *buffer, GtkStatusbar  *statusbar
     g_free(language_msg);
 }
 
-void update_unsaved_tab(GtkSourceBuffer* buffer, GtkWidget* tab)
+void update_unsaved_tab(GtkSourceBuffer *buffer, GtkWidget *tab)
 {
-    const gchar* tab_name = gtk_label_get_text(GTK_LABEL(tab));
-    if(tab_name[0] != '*')
+    const gchar *tab_name = gtk_label_get_text(GTK_LABEL(tab));
+    if (tab_name[0] != '*')
     {
-        const gchar* language_msg = g_strdup_printf("*%s", tab_name);
+        const gchar *language_msg = g_strdup_printf("*%s", tab_name);
         gtk_label_set_text(GTK_LABEL(tab), language_msg);
         g_free(language_msg);
     }
@@ -1161,9 +1111,9 @@ void mark_set_callback(GtkTextBuffer *buffer, const GtkTextIter *new_location, G
 {
     update_statusbar_col_lines(buffer, GTK_STATUSBAR(data));
 }
-void search_bar_callback(GtkWidget* widget, GdkEvent* event, gpointer user_data)
+void search_bar_callback(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
-    GtkSearchBar* bar = GTK_SEARCH_BAR(user_data);
+    GtkSearchBar *bar = GTK_SEARCH_BAR(user_data);
     return gtk_search_bar_handle_event(bar, event);
 }
 void docs_callback(GtkMenuItem *menu_item)
