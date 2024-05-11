@@ -347,14 +347,14 @@ void highlighting_settings_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     const char *label;
     label = gtk_menu_item_get_label(menu_item);
 
-    if (strcmp(label, "Ada") == 0)
-    {
-        lang_code = "ada";
-    }
-    if (strcmp(label, "Cg") == 0)
-    {
-        lang_code = "cg";
-    }
+    // if (strcmp(label, "Ada") == 0)
+    // {
+    //     lang_code = "ada";
+    // }
+    // if (strcmp(label, "Cg") == 0)
+    // {
+    //     lang_code = "cg";
+    // }
     if (strcmp(label, "C") == 0)
     {
         lang_code = "c";
@@ -363,162 +363,162 @@ void highlighting_settings_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     {
         lang_code = "cpp";
     }
-    if (strcmp(label, "C#") == 0)
-    {
-        lang_code = "csharp";
-    }
-    if (strcmp(label, "Cmake") == 0)
-    {
-        lang_code = "cmake";
-    }
-    if (strcmp(label, "Cobol") == 0)
-    {
-        lang_code = "cobol";
-    }
-    if (strcmp(label, "Css") == 0)
-    {
-        lang_code = "css";
-    }
-    if (strcmp(label, "Cuda") == 0)
-    {
-        lang_code = "cuda";
-    }
-    if (strcmp(label, "Eiffel") == 0)
-    {
-        lang_code = "eiffel";
-    }
-    if (strcmp(label, "Fortran") == 0)
-    {
-        lang_code = "fortran";
-    }
-    if (strcmp(label, "F#") == 0)
-    {
-        lang_code = "fsharp";
-    }
-    if (strcmp(label, "GLSL") == 0)
-    {
-        lang_code = "glsl";
-    }
-    if (strcmp(label, "Go") == 0)
-    {
-        lang_code = "go";
-    }
-    if (strcmp(label, "Groovy") == 0)
-    {
-        lang_code = "groovy";
-    }
-    if (strcmp(label, "Haskell") == 0)
-    {
-        lang_code = "haskell";
-    }
-    if (strcmp(label, "HTML") == 0)
-    {
-        lang_code = "html";
-    }
-    if (strcmp(label, "Java") == 0)
-    {
-        lang_code = "java";
-    }
-    if (strcmp(label, "JavaScript") == 0)
-    {
-        lang_code = "js";
-    }
-    if (strcmp(label, "Julia") == 0)
-    {
-        lang_code = "julia";
-    }
-    if (strcmp(label, "Kotlin") == 0)
-    {
-        lang_code = "kotlin";
-    }
-    if (strcmp(label, "LaTeX") == 0)
-    {
-        lang_code = "latex";
-    }
-    if (strcmp(label, "Lua") == 0)
-    {
-        lang_code = "lua";
-    }
-    if (strcmp(label, "Makefile") == 0)
-    {
-        lang_code = "makefile";
-    }
-    if (strcmp(label, "Meson") == 0)
-    {
-        lang_code = "meson";
-    }
-    if (strcmp(label, "OCaml") == 0)
-    {
-        lang_code = "ocaml";
-    }
-    if (strcmp(label, "OpenCL") == 0)
-    {
-        lang_code = "opencl";
-    }
-    if (strcmp(label, "Pascal") == 0)
-    {
-        lang_code = "pascal";
-    }
-    if (strcmp(label, "Perl") == 0)
-    {
-        lang_code = "perl";
-    }
-    if (strcmp(label, "PHP") == 0)
-    {
-        lang_code = "php";
-    }
+    // if (strcmp(label, "C#") == 0)
+    // {
+    //     lang_code = "csharp";
+    // }
+    // if (strcmp(label, "Cmake") == 0)
+    // {
+    //     lang_code = "cmake";
+    // }
+    // if (strcmp(label, "Cobol") == 0)
+    // {
+    //     lang_code = "cobol";
+    // }
+    // if (strcmp(label, "Css") == 0)
+    // {
+    //     lang_code = "css";
+    // }
+    // if (strcmp(label, "Cuda") == 0)
+    // {
+    //     lang_code = "cuda";
+    // }
+    // if (strcmp(label, "Eiffel") == 0)
+    // {
+    //     lang_code = "eiffel";
+    // }
+    // if (strcmp(label, "Fortran") == 0)
+    // {
+    //     lang_code = "fortran";
+    // }
+    // if (strcmp(label, "F#") == 0)
+    // {
+    //     lang_code = "fsharp";
+    // }
+    // if (strcmp(label, "GLSL") == 0)
+    // {
+    //     lang_code = "glsl";
+    // }
+    // if (strcmp(label, "Go") == 0)
+    // {
+    //     lang_code = "go";
+    // }
+    // if (strcmp(label, "Groovy") == 0)
+    // {
+    //     lang_code = "groovy";
+    // }
+    // if (strcmp(label, "Haskell") == 0)
+    // {
+    //     lang_code = "haskell";
+    // }
+    // if (strcmp(label, "HTML") == 0)
+    // {
+    //     lang_code = "html";
+    // }
+    // if (strcmp(label, "Java") == 0)
+    // {
+    //     lang_code = "java";
+    // }
+    // if (strcmp(label, "JavaScript") == 0)
+    // {
+    //     lang_code = "js";
+    // }
+    // if (strcmp(label, "Julia") == 0)
+    // {
+    //     lang_code = "julia";
+    // }
+    // if (strcmp(label, "Kotlin") == 0)
+    // {
+    //     lang_code = "kotlin";
+    // }
+    // if (strcmp(label, "LaTeX") == 0)
+    // {
+    //     lang_code = "latex";
+    // }
+    // if (strcmp(label, "Lua") == 0)
+    // {
+    //     lang_code = "lua";
+    // }
+    // if (strcmp(label, "Makefile") == 0)
+    // {
+    //     lang_code = "makefile";
+    // }
+    // if (strcmp(label, "Meson") == 0)
+    // {
+    //     lang_code = "meson";
+    // }
+    // if (strcmp(label, "OCaml") == 0)
+    // {
+    //     lang_code = "ocaml";
+    // }
+    // if (strcmp(label, "OpenCL") == 0)
+    // {
+    //     lang_code = "opencl";
+    // }
+    // if (strcmp(label, "Pascal") == 0)
+    // {
+    //     lang_code = "pascal";
+    // }
+    // if (strcmp(label, "Perl") == 0)
+    // {
+    //     lang_code = "perl";
+    // }
+    // if (strcmp(label, "PHP") == 0)
+    // {
+    //     lang_code = "php";
+    // }
     if (strcmp(label, "Python") == 0)
     {
         lang_code = "python3";
     }
-    if (strcmp(label, "R") == 0)
-    {
-        lang_code = "r";
-    }
-    if (strcmp(label, "Ruby") == 0)
-    {
-        lang_code = "ruby";
-    }
-    if (strcmp(label, "Rust") == 0)
-    {
-        lang_code = "rust";
-    }
-    if (strcmp(label, "Scala") == 0)
-    {
-        lang_code = "scala";
-    }
-    if (strcmp(label, "Bourne Shell") == 0)
-    {
-        lang_code = "sh";
-    }
-    if (strcmp(label, "SQL") == 0)
-    {
-        lang_code = "sql";
-    }
-    if (strcmp(label, "Swift") == 0)
-    {
-        lang_code = "swift";
-    }
-    if (strcmp(label, "Vala") == 0)
-    {
-        lang_code = "vala";
-    }
-    if (strcmp(label, "Verilog") == 0)
-    {
-        lang_code = "verilog";
-    }
-    if (strcmp(label, "VHDL") == 0)
-    {
-        lang_code = "vhdl";
-    }
-    if (strcmp(label, "XML") == 0)
-    {
-        lang_code = "xml";
-    }
-    if (strcmp(label, "YAML") == 0)
-    {
-        lang_code = "yaml";
-    }
+    // if (strcmp(label, "R") == 0)
+    // {
+    //     lang_code = "r";
+    // }
+    // if (strcmp(label, "Ruby") == 0)
+    // {
+    //     lang_code = "ruby";
+    // }
+    // if (strcmp(label, "Rust") == 0)
+    // {
+    //     lang_code = "rust";
+    // }
+    // if (strcmp(label, "Scala") == 0)
+    // {
+    //     lang_code = "scala";
+    // }
+    // if (strcmp(label, "Bourne Shell") == 0)
+    // {
+    //     lang_code = "sh";
+    // }
+    // if (strcmp(label, "SQL") == 0)
+    // {
+    //     lang_code = "sql";
+    // }
+    // if (strcmp(label, "Swift") == 0)
+    // {
+    //     lang_code = "swift";
+    // }
+    // if (strcmp(label, "Vala") == 0)
+    // {
+    //     lang_code = "vala";
+    // }
+    // if (strcmp(label, "Verilog") == 0)
+    // {
+    //     lang_code = "verilog";
+    // }
+    // if (strcmp(label, "VHDL") == 0)
+    // {
+    //     lang_code = "vhdl";
+    // }
+    // if (strcmp(label, "XML") == 0)
+    // {
+    //     lang_code = "xml";
+    // }
+    // if (strcmp(label, "YAML") == 0)
+    // {
+    //     lang_code = "yaml";
+    // }
     g_printf("%s\n", lang_code);
     meta_data->lang = gtk_source_language_manager_get_language(GTK_SOURCE_LANGUAGE_MANAGER(meta_data->lang_manager), lang_code);
     apply_language(meta_data);
