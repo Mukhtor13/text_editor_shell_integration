@@ -30,9 +30,7 @@ SourceObject *create_source(MetaData *meta_data)
 
         meta_data->justify = GTK_JUSTIFY_LEFT;
         meta_data->auto_indent = TRUE;
-        // meta_data->space_tabs = FALSE;
         meta_data->line_numbers = TRUE;
-        // meta_data->visualize_spaces = FALSE;
         meta_data->highlight_line = TRUE;
         meta_data->wrap_mode = GTK_WRAP_NONE;
 
@@ -76,9 +74,6 @@ SourceObject *create_source(MetaData *meta_data)
     gtk_widget_modify_font(source_object->textview, meta_data->font_desc);
 
     gtk_container_add(GTK_CONTAINER(source_object->scrolled_window), source_object->textview);
-
-    // GSettings settings;
-    // gtk_source_space_drawer_bind_matrix_setting(drawer, &settings, "->", G_SETTINGS_BIND_DEFAULT);
 
     return source_object;
 }

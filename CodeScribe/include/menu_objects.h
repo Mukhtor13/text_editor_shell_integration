@@ -48,9 +48,7 @@ typedef struct
     GtkWidget *paste_mi;   // Gtk::MenuItem
     GtkWidget *sep2;       // Gtk::Separetor
     GtkWidget *comment_mi; // Gtk::MenuItem
-    // GtkWidget *uncomment_mi; // Gtk::MenuItem
     GtkWidget *sep3;
-    // GtkWidget *insert_date_mi;
 } EditMenu; // Edit Menu
 
 typedef struct
@@ -58,15 +56,9 @@ typedef struct
     GtkWidget *format_menu;
     GtkWidget *format_mi;
     GtkWidget *auto_indent_mi;
-    // GtkWidget *space_tabs_mi;
     GtkWidget *line_numbers_mi;
-    // GtkWidget *visualize_spaces_mi;
     GtkWidget *wrap_words_mi;
     GtkWidget *tab_width_head_mi;
-    // GtkWidget* justify_left_mi;
-    // GtkWidget* justify_right_mi;
-    // GtkWidget* justify_center_mi;
-    // GtkWidget* justify_fill_mi;
 } FormatMenu; // Format Menu
 
 typedef struct
@@ -74,9 +66,8 @@ typedef struct
     GtkWidget *search_menu; // Gtk::Menu
     GtkWidget *search_mi;   // Gtk::MenuItem
     GtkWidget *find_mi;     // Gtk::MenuItem
-    // GtkWidget *replace_mi;  // Gtk::MenuItem
-    GtkWidget *goto_mi; // Gtk::MenuItem
-} SearchMenu;           // Search Menu
+    GtkWidget *goto_mi;     // Gtk::MenuItem
+} SearchMenu;               // Search Menu
 
 typedef struct
 {
@@ -87,15 +78,6 @@ typedef struct
     GtkWidget *compile_and_run_mi; // Gtk::MenuItem
 } BuildMenu;                       // Build Menu
 
-// typedef struct
-// {
-//     GtkWidget *help_menu; // Gtk::Menu
-//     GtkWidget *help_mi;   // Gtk::MenuItem
-//     GtkWidget *about_mi;  // Gtk::MenuItem
-//     GtkWidget *docs_mi;   // Gtk::MenuItem
-//     GtkWidget *sep;       // Gtk::MenuItem
-// } HelpMenu;               // Help Menu
-
 typedef struct
 {
     FileMenu *file_menu;
@@ -103,7 +85,6 @@ typedef struct
     FormatMenu *format_menu;
     SearchMenu *search_menu;
     BuildMenu *build_menu;
-    // HelpMenu *help_menu;
 } MenuBar;
 
 typedef struct
@@ -139,9 +120,7 @@ typedef struct
 
     GtkJustification justify;
     gboolean auto_indent;
-    // gboolean space_tabs;
     gboolean line_numbers;
-    // gboolean visualize_spaces;
     gboolean highlight_line;
     GtkWrapMode wrap_mode;
 

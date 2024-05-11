@@ -336,25 +336,12 @@ void zoom_out_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     apply_font(meta_data);
 }
 
-// void compilers_settings_callback()
-// {
-//     g_printf("%s\n", "compilers_settings_callback");
-// }
-
 void highlighting_settings_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
     const char *lang_code;
     const char *label;
     label = gtk_menu_item_get_label(menu_item);
 
-    // if (strcmp(label, "Ada") == 0)
-    // {
-    //     lang_code = "ada";
-    // }
-    // if (strcmp(label, "Cg") == 0)
-    // {
-    //     lang_code = "cg";
-    // }
     if (strcmp(label, "C") == 0)
     {
         lang_code = "c";
@@ -363,162 +350,11 @@ void highlighting_settings_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     {
         lang_code = "cpp";
     }
-    // if (strcmp(label, "C#") == 0)
-    // {
-    //     lang_code = "csharp";
-    // }
-    // if (strcmp(label, "Cmake") == 0)
-    // {
-    //     lang_code = "cmake";
-    // }
-    // if (strcmp(label, "Cobol") == 0)
-    // {
-    //     lang_code = "cobol";
-    // }
-    // if (strcmp(label, "Css") == 0)
-    // {
-    //     lang_code = "css";
-    // }
-    // if (strcmp(label, "Cuda") == 0)
-    // {
-    //     lang_code = "cuda";
-    // }
-    // if (strcmp(label, "Eiffel") == 0)
-    // {
-    //     lang_code = "eiffel";
-    // }
-    // if (strcmp(label, "Fortran") == 0)
-    // {
-    //     lang_code = "fortran";
-    // }
-    // if (strcmp(label, "F#") == 0)
-    // {
-    //     lang_code = "fsharp";
-    // }
-    // if (strcmp(label, "GLSL") == 0)
-    // {
-    //     lang_code = "glsl";
-    // }
-    // if (strcmp(label, "Go") == 0)
-    // {
-    //     lang_code = "go";
-    // }
-    // if (strcmp(label, "Groovy") == 0)
-    // {
-    //     lang_code = "groovy";
-    // }
-    // if (strcmp(label, "Haskell") == 0)
-    // {
-    //     lang_code = "haskell";
-    // }
-    // if (strcmp(label, "HTML") == 0)
-    // {
-    //     lang_code = "html";
-    // }
-    // if (strcmp(label, "Java") == 0)
-    // {
-    //     lang_code = "java";
-    // }
-    // if (strcmp(label, "JavaScript") == 0)
-    // {
-    //     lang_code = "js";
-    // }
-    // if (strcmp(label, "Julia") == 0)
-    // {
-    //     lang_code = "julia";
-    // }
-    // if (strcmp(label, "Kotlin") == 0)
-    // {
-    //     lang_code = "kotlin";
-    // }
-    // if (strcmp(label, "LaTeX") == 0)
-    // {
-    //     lang_code = "latex";
-    // }
-    // if (strcmp(label, "Lua") == 0)
-    // {
-    //     lang_code = "lua";
-    // }
-    // if (strcmp(label, "Makefile") == 0)
-    // {
-    //     lang_code = "makefile";
-    // }
-    // if (strcmp(label, "Meson") == 0)
-    // {
-    //     lang_code = "meson";
-    // }
-    // if (strcmp(label, "OCaml") == 0)
-    // {
-    //     lang_code = "ocaml";
-    // }
-    // if (strcmp(label, "OpenCL") == 0)
-    // {
-    //     lang_code = "opencl";
-    // }
-    // if (strcmp(label, "Pascal") == 0)
-    // {
-    //     lang_code = "pascal";
-    // }
-    // if (strcmp(label, "Perl") == 0)
-    // {
-    //     lang_code = "perl";
-    // }
-    // if (strcmp(label, "PHP") == 0)
-    // {
-    //     lang_code = "php";
-    // }
     if (strcmp(label, "Python") == 0)
     {
         lang_code = "python3";
     }
-    // if (strcmp(label, "R") == 0)
-    // {
-    //     lang_code = "r";
-    // }
-    // if (strcmp(label, "Ruby") == 0)
-    // {
-    //     lang_code = "ruby";
-    // }
-    // if (strcmp(label, "Rust") == 0)
-    // {
-    //     lang_code = "rust";
-    // }
-    // if (strcmp(label, "Scala") == 0)
-    // {
-    //     lang_code = "scala";
-    // }
-    // if (strcmp(label, "Bourne Shell") == 0)
-    // {
-    //     lang_code = "sh";
-    // }
-    // if (strcmp(label, "SQL") == 0)
-    // {
-    //     lang_code = "sql";
-    // }
-    // if (strcmp(label, "Swift") == 0)
-    // {
-    //     lang_code = "swift";
-    // }
-    // if (strcmp(label, "Vala") == 0)
-    // {
-    //     lang_code = "vala";
-    // }
-    // if (strcmp(label, "Verilog") == 0)
-    // {
-    //     lang_code = "verilog";
-    // }
-    // if (strcmp(label, "VHDL") == 0)
-    // {
-    //     lang_code = "vhdl";
-    // }
-    // if (strcmp(label, "XML") == 0)
-    // {
-    //     lang_code = "xml";
-    // }
-    // if (strcmp(label, "YAML") == 0)
-    // {
-    //     lang_code = "yaml";
-    // }
+
     g_printf("%s\n", lang_code);
     meta_data->lang = gtk_source_language_manager_get_language(GTK_SOURCE_LANGUAGE_MANAGER(meta_data->lang_manager), lang_code);
     apply_language(meta_data);
@@ -668,51 +504,12 @@ void comment_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     gtk_text_buffer_insert(buffer, &begI, comment, strlen(comment));
 }
 
-// void uncomment_callback(GtkMenuItem *menu_item, MetaData *meta_data)
-// {
-//     g_printf("%s\n", "uncomment_callback");
-// }
-
-// void insert_date_callback(GtkMenuItem *menu_item, MetaData *meta_data)
-// {
-//     GtkSourceBuffer *buffer;
-//     GtkClipboard *clipboard;
-//     GtkTextMark *insertMark;
-//     GtkTextIter iter;
-//     gchar *date = (gchar *)malloc(256 * sizeof(gchar));
-
-//     calc_date(date);
-
-//     buffer = get_current_page_buffer(meta_data);
-//     insertMark = gtk_text_buffer_get_mark(buffer, "insert");
-//     gtk_text_buffer_get_iter_at_mark(buffer, &iter, insertMark);
-
-//     gtk_text_buffer_insert(buffer, &iter, date, strlen(date));
-// }
-
-// void justify_menu_callback(GtkMenuItem *item, MetaData *meta_data)
-// {
-//     if (strcmp(gtk_menu_item_get_label(item), "Align Left") == 0)
-//         meta_data->justify = GTK_JUSTIFY_LEFT;
-//     if (strcmp(gtk_menu_item_get_label(item), "Align Center") == 0)
-//         meta_data->justify = GTK_JUSTIFY_CENTER;
-//     if (strcmp(gtk_menu_item_get_label(item), "Align Right") == 0)
-//         meta_data->justify = GTK_JUSTIFY_RIGHT;
-//     if (strcmp(gtk_menu_item_get_label(item), "Align Fill") == 0)
-//         meta_data->justify = GTK_JUSTIFY_FILL;
-//     apply_specification(meta_data);
-// }
-
 void format_callback(GtkMenuItem *item, MetaData *meta_data)
 {
     if (strcmp(gtk_menu_item_get_label(item), "Enable Auto-Indent") == 0)
     {
         meta_data->auto_indent = !meta_data->auto_indent;
     }
-    // if (strcmp(gtk_menu_item_get_label(item), "Insert spaces instead of tabs") == 0)
-    // {
-    //     meta_data->space_tabs = !meta_data->space_tabs;
-    // }
     if (strcmp(gtk_menu_item_get_label(item), "Highlight current line") == 0)
     {
         meta_data->highlight_line = !meta_data->highlight_line;
@@ -721,10 +518,6 @@ void format_callback(GtkMenuItem *item, MetaData *meta_data)
     {
         meta_data->line_numbers = !meta_data->line_numbers;
     }
-    // if (strcmp(gtk_menu_item_get_label(item), "Display spaces as symbols") == 0)
-    // {
-    //     meta_data->visualize_spaces = !meta_data->visualize_spaces;
-    // }
     if (strcmp(gtk_menu_item_get_label(item), "Text wrapping") == 0)
     {
         if (meta_data->wrap_mode == GTK_WRAP_NONE)
@@ -743,7 +536,6 @@ void switch_case_sense_callback(GtkCheckButton *case_sense_btn, MetaData *meta_d
 void cancel_file_dlg_callback(GtkWidget *widget, MetaData *meta_data)
 {
     gtk_window_close(meta_data->dial_data->dialog);
-    // free(meta_data->dial_data);
 }
 
 void forward_file_dlg_callback(GtkWidget *widget, MetaData *meta_data)
@@ -855,19 +647,8 @@ void find_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     g_signal_connect(dial_data->cancel_btn, "clicked",
                      G_CALLBACK(cancel_file_dlg_callback), meta_data);
 
-    // g_signal_connect (dial_data->text_entry, "changed",
-    //                   G_CALLBACK (dummy_callback), meta_data);
-
-    // g_signal_connect (app->findrepwin, "key_press_event",
-    //                   G_CALLBACK (on_fr_keypress), meta_data);
-
     gtk_widget_show(dial_data->dialog);
 }
-
-// void replace_callback(GtkMenuItem *menu_item, MetaData *meta_data)
-// {
-//     g_printf("%s\n", "replace_callback");
-// }
 
 void goto_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {
@@ -1019,18 +800,6 @@ void compile_and_run_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     }
 }
 
-// void about_callback(GtkMenuItem *menu_item, GtkWindow *parent_window)
-// {
-//     const char *authors[] = {"Farididdin Rakhimov", NULL};
-
-//     gtk_show_about_dialog(parent_window,
-//                           "program-name", "Code Scribe",
-//                           "authors", authors,
-//                           "license", "GNU General Public License",
-//                           "comments", "A GTK+ based code editor with online codebase",
-//                           NULL);
-// }
-
 void update_statusbar_col_lines(GtkSourceBuffer *buffer, GtkStatusbar *statusbar)
 {
     gchar *posititon_msg;
@@ -1085,21 +854,6 @@ void search_bar_callback(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
     GtkSearchBar *bar = GTK_SEARCH_BAR(user_data);
     return gtk_search_bar_handle_event(bar, event);
-}
-void docs_callback(GtkMenuItem *menu_item)
-{
-    int status;
-    char *args[2];
-
-    char *const parmList[] = {"evince", "./resources/report.pdf", NULL};
-    char *const list[] = {NULL};
-
-    if (fork() == 0)
-        execve("/bin/evince", parmList, list);
-    else
-        wait(&status);
-
-    return 0;
 }
 
 #endif

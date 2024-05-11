@@ -368,16 +368,6 @@ void apply_language(MetaData *meta_data)
     buffer = get_current_page_buffer(meta_data);
     gtk_source_buffer_set_language(buffer, meta_data->lang);
     g_signal_emit_by_name(buffer, "changed");
-    /*
-       for (int i = 0; i < page_cnt; i++)
-       {
-          curr_page = gtk_notebook_get_nth_page(meta_data->notebook, i);
-          child_list = gtk_container_get_children(GTK_CONTAINER(curr_page));
-          textview = child_list->data;
-          buffer = gtk_text_view_get_buffer((GtkTextView*)textview);
-          gtk_source_buffer_set_language(buffer, meta_data->lang);
-       }
-    */
 }
 
 void apply_scheme(MetaData *meta_data)
@@ -428,9 +418,7 @@ void apply_format_prefs(MetaData *meta_data)
     int page_cnt = gtk_notebook_get_n_pages(GTK_NOTEBOOK(meta_data->notebook));
 
     gboolean change_auto_indent;
-    // gboolean change_space_tabs;
     gboolean change_line_numbers;
-    // gboolean change_visualize_spaces;
     gboolean change_highlight_line;
     gboolean change_wrap_words;
 
@@ -444,9 +432,7 @@ void apply_format_prefs(MetaData *meta_data)
         if (i == 0)
         {
             change_auto_indent = meta_data->auto_indent != gtk_source_view_get_auto_indent(textview);
-            // change_space_tabs = meta_data->space_tabs != gtk_source_view_get_insert_spaces_instead_of_tabs(textview);
             change_line_numbers = meta_data->line_numbers != gtk_source_view_get_show_line_numbers(textview);
-            // change_visualize_spaces = meta_data->visualize_spaces != gtk_source_space_drawer_get_enable_matrix(drawer);
             change_highlight_line = meta_data->highlight_line != gtk_source_view_get_highlight_current_line(textview);
             change_wrap_words = meta_data->wrap_mode != gtk_text_view_get_wrap_mode(textview);
         }
@@ -454,15 +440,6 @@ void apply_format_prefs(MetaData *meta_data)
         {
             gtk_source_view_set_auto_indent(textview, meta_data->auto_indent);
         }
-        // if (change_space_tabs)
-        // {
-        //     gtk_source_view_set_insert_spaces_instead_of_tabs(textview, meta_data->space_tabs);
-        // }
-        // if (change_visualize_spaces)
-        // {
-        //     gtk_source_space_drawer_set_enable_matrix(drawer, meta_data->visualize_spaces);
-        //     printf("%d\n", meta_data->visualize_spaces);
-        // }
         if (change_line_numbers)
         {
             gtk_source_view_set_show_line_numbers(textview, meta_data->line_numbers);
@@ -541,20 +518,11 @@ void calc_lang_comment(MetaData *meta_data, gchar *comment)
     GtkSourceLanguage *lang = gtk_source_buffer_get_language(buffer);
     gchar *lang_name = g_strdup_printf("%s", gtk_source_language_get_name(lang));
 
-    if (strcmp(lang_name, "Ada") == 0 || strcmp(lang_name, "Eiffel") == 0 || strcmp(lang_name, "Haskell") == 0 || strcmp(lang_name, "Lua") == 0 || strcmp(lang_name, "SQL") == 0 ||
-        strcmp(lang_name, "VHDL") == 0)
-    {
-        strcpy(comment, "--");
-    }
-    if (strcmp(lang_name, "C") == 0 || strcmp(lang_name, "C++") == 0 || strcmp(lang_name, "C/ObjC Header") == 0 || strcmp(lang_name, "Cg") == 0 || strcmp(lang_name, "C#") == 0 || strcmp(lang_name, "CUDA") == 0 ||
-        strcmp(lang_name, "GLSL") == 0 || strcmp(lang_name, "F#") == 0 || strcmp(lang_name, "Go") == 0 || strcmp(lang_name, "Groovy") == 0 || strcmp(lang_name, "Java") == 0 ||
-        strcmp(lang_name, "JavaScript") == 0 || strcmp(lang_name, "Kotlin") == 0 || strcmp(lang_name, "OpenCL") == 0 || strcmp(lang_name, "Pascal") == 0 || strcmp(lang_name, "Rust") == 0 ||
-        strcmp(lang_name, "Scala") == 0 || strcmp(lang_name, "Swift") == 0 || strcmp(lang_name, "Vala") == 0 || strcmp(lang_name, "Verilog") == 0)
+    if (strcmp(lang_name, "C") == 0 || strcmp(lang_name, "C++") == 0)
     {
         strcpy(comment, "//");
     }
-    if (strcmp(lang_name, "Python 3") == 0 || strcmp(lang_name, "Python") == 0 || strcmp(lang_name, "Julia") == 0 || strcmp(lang_name, "Makefile") == 0 || strcmp(lang_name, "Meson") == 0 || strcmp(lang_name, "Perl") == 0 ||
-        strcmp(lang_name, "PHP") == 0 || strcmp(lang_name, "R") == 0 || strcmp(lang_name, "Ruby") == 0 || strcmp(lang_name, "sh") == 0 || strcmp(lang_name, "YAML") == 0)
+    if (strcmp(lang_name, "Python 3") == 0 || strcmp(lang_name, "Python") == 0)
     {
         strcpy(comment, "#");
     }
@@ -571,33 +539,6 @@ void calc_lang_comment(MetaData *meta_data, gchar *comment)
         strcpy(comment, "%");
     }
 
-    /*
-        C#
-        if(strcmp(label, "Cmake")==0)
-        {
-            lang_code = "cmake";
-        }
-        if(strcmp(label, "Css")==0)
-        {
-            lang_code = "css";
-        }
-        if(strcmp(label, "HTML")==0)
-        {
-            lang_code = "html";
-        }
-        if(strcmp(label, "Meson")==0)
-        {
-            lang_code = "meson";
-        }
-        if(strcmp(label, "OCaml")==0)
-        {
-            lang_code = "ocaml";
-        }
-        if(strcmp(label, "XML")==0)
-        {
-            lang_code = "xml";
-        }
-    */
     g_free(lang_name);
 }
 

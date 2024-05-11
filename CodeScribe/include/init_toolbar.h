@@ -23,7 +23,6 @@ GtkWidget *create_toolbar(WindowDependecies *win_dep, MetaData *meta_data)
     GtkWidget *copyTb;
     GtkWidget *pasteTb;
     GtkWidget *sep2;
-    // GtkWidget *fontTb;
     GtkWidget *zoomInTb;
     GtkWidget *zoomOutTb;
     GtkWidget *sep3;
@@ -34,7 +33,6 @@ GtkWidget *create_toolbar(WindowDependecies *win_dep, MetaData *meta_data)
     GtkWidget *search_Tb;
     GtkWidget *goto_Tb;
     GtkWidget *sep5;
-    GtkWidget *aboutTb;
     GtkWidget *exitTb;
 
     toolbar = gtk_toolbar_new();
@@ -82,9 +80,6 @@ GtkWidget *create_toolbar(WindowDependecies *win_dep, MetaData *meta_data)
     zoomOutTb = gtk_tool_button_new(gtk_image_new_from_icon_name("zoom-out", ICON_SIZE), "Zoom Out");
     gtk_toolbar_insert(GTK_TOOLBAR(toolbar), zoomOutTb, -1);
 
-    // fontTb = gtk_tool_button_new(gtk_image_new_from_icon_name("preferences-desktop-font", ICON_SIZE), "Font");
-    // gtk_toolbar_insert(GTK_TOOLBAR(toolbar), fontTb, -1);
-
     sep3 = gtk_separator_tool_item_new();
     gtk_toolbar_insert(GTK_TOOLBAR(toolbar), sep3, -1);
 
@@ -108,9 +103,6 @@ GtkWidget *create_toolbar(WindowDependecies *win_dep, MetaData *meta_data)
 
     sep5 = gtk_separator_tool_item_new();
     gtk_toolbar_insert(GTK_TOOLBAR(toolbar), sep5, -1);
-
-    aboutTb = gtk_tool_button_new(gtk_image_new_from_icon_name("help-about", ICON_SIZE), "About");
-    gtk_toolbar_insert(GTK_TOOLBAR(toolbar), aboutTb, -1);
 
     exitTb = gtk_tool_button_new(gtk_image_new_from_icon_name("application-exit", ICON_SIZE), "Quit");
     gtk_toolbar_insert(GTK_TOOLBAR(toolbar), exitTb, -1);
@@ -160,17 +152,11 @@ GtkWidget *create_toolbar(WindowDependecies *win_dep, MetaData *meta_data)
     g_signal_connect(G_OBJECT(goto_Tb), "clicked",
                      G_CALLBACK(goto_callback), meta_data);
 
-    // g_signal_connect(G_OBJECT(fontTb), "clicked",
-    //     G_CALLBACK(font_settings_callback), meta_data);
-
     g_signal_connect(G_OBJECT(zoomInTb), "clicked",
                      G_CALLBACK(zoom_in_callback), meta_data);
 
     g_signal_connect(G_OBJECT(zoomOutTb), "clicked",
                      G_CALLBACK(zoom_out_callback), meta_data);
-
-    // g_signal_connect(G_OBJECT(aboutTb), "clicked",
-    //                  G_CALLBACK(about_callback), (gpointer)win_dep->window);
 
     g_signal_connect(G_OBJECT(exitTb), "clicked",
                      G_CALLBACK(gtk_main_quit), NULL);

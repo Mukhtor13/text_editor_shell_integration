@@ -46,13 +46,11 @@ int main(int argc, char *argv[])
   FormatMenu format_menu;
   SearchMenu search_menu;
   BuildMenu build_menu;
-  // HelpMenu help_menu;
   menubar_obj.file_menu = &file_menu;
   menubar_obj.edit_menu = &edit_menu;
   menubar_obj.format_menu = &format_menu;
   menubar_obj.search_menu = &search_menu;
   menubar_obj.build_menu = &build_menu;
-  // menubar_obj.help_menu = &help_menu;
 
   vbox = create_menu_vbox(&win_dep, &menubar_obj, &meta_data, &notebook, &terminal);
 
