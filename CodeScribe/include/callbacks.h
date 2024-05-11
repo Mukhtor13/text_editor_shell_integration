@@ -668,27 +668,27 @@ void comment_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     gtk_text_buffer_insert(buffer, &begI, comment, strlen(comment));
 }
 
-void uncomment_callback(GtkMenuItem *menu_item, MetaData *meta_data)
-{
-    g_printf("%s\n", "uncomment_callback");
-}
+// void uncomment_callback(GtkMenuItem *menu_item, MetaData *meta_data)
+// {
+//     g_printf("%s\n", "uncomment_callback");
+// }
 
-void insert_date_callback(GtkMenuItem *menu_item, MetaData *meta_data)
-{
-    GtkSourceBuffer *buffer;
-    GtkClipboard *clipboard;
-    GtkTextMark *insertMark;
-    GtkTextIter iter;
-    gchar *date = (gchar *)malloc(256 * sizeof(gchar));
+// void insert_date_callback(GtkMenuItem *menu_item, MetaData *meta_data)
+// {
+//     GtkSourceBuffer *buffer;
+//     GtkClipboard *clipboard;
+//     GtkTextMark *insertMark;
+//     GtkTextIter iter;
+//     gchar *date = (gchar *)malloc(256 * sizeof(gchar));
 
-    calc_date(date);
+//     calc_date(date);
 
-    buffer = get_current_page_buffer(meta_data);
-    insertMark = gtk_text_buffer_get_mark(buffer, "insert");
-    gtk_text_buffer_get_iter_at_mark(buffer, &iter, insertMark);
+//     buffer = get_current_page_buffer(meta_data);
+//     insertMark = gtk_text_buffer_get_mark(buffer, "insert");
+//     gtk_text_buffer_get_iter_at_mark(buffer, &iter, insertMark);
 
-    gtk_text_buffer_insert(buffer, &iter, date, strlen(date));
-}
+//     gtk_text_buffer_insert(buffer, &iter, date, strlen(date));
+// }
 
 // void justify_menu_callback(GtkMenuItem *item, MetaData *meta_data)
 // {
@@ -864,10 +864,10 @@ void find_callback(GtkMenuItem *menu_item, MetaData *meta_data)
     gtk_widget_show(dial_data->dialog);
 }
 
-void replace_callback(GtkMenuItem *menu_item, MetaData *meta_data)
-{
-    g_printf("%s\n", "replace_callback");
-}
+// void replace_callback(GtkMenuItem *menu_item, MetaData *meta_data)
+// {
+//     g_printf("%s\n", "replace_callback");
+// }
 
 void goto_callback(GtkMenuItem *menu_item, MetaData *meta_data)
 {

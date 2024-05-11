@@ -38,19 +38,19 @@ typedef struct
 
 typedef struct
 {
-    GtkWidget *edit_menu;    // Gtk::Menu
-    GtkWidget *edit_mi;      // Gtk::MenuItem
-    GtkWidget *undo_mi;      // Gtk::MenuItem
-    GtkWidget *redo_mi;      // Gtk::MenuItem
-    GtkWidget *sep1;         // Gtk::Separetor
-    GtkWidget *cut_mi;       // Gtk::MenuItem
-    GtkWidget *copy_mi;      // Gtk::MenuItem
-    GtkWidget *paste_mi;     // Gtk::MenuItem
-    GtkWidget *sep2;         // Gtk::Separetor
-    GtkWidget *comment_mi;   // Gtk::MenuItem
-    GtkWidget *uncomment_mi; // Gtk::MenuItem
+    GtkWidget *edit_menu;  // Gtk::Menu
+    GtkWidget *edit_mi;    // Gtk::MenuItem
+    GtkWidget *undo_mi;    // Gtk::MenuItem
+    GtkWidget *redo_mi;    // Gtk::MenuItem
+    GtkWidget *sep1;       // Gtk::Separetor
+    GtkWidget *cut_mi;     // Gtk::MenuItem
+    GtkWidget *copy_mi;    // Gtk::MenuItem
+    GtkWidget *paste_mi;   // Gtk::MenuItem
+    GtkWidget *sep2;       // Gtk::Separetor
+    GtkWidget *comment_mi; // Gtk::MenuItem
+    // GtkWidget *uncomment_mi; // Gtk::MenuItem
     GtkWidget *sep3;
-    GtkWidget *insert_date_mi;
+    // GtkWidget *insert_date_mi;
 } EditMenu; // Edit Menu
 
 typedef struct
@@ -74,9 +74,9 @@ typedef struct
     GtkWidget *search_menu; // Gtk::Menu
     GtkWidget *search_mi;   // Gtk::MenuItem
     GtkWidget *find_mi;     // Gtk::MenuItem
-    GtkWidget *replace_mi;  // Gtk::MenuItem
-    GtkWidget *goto_mi;     // Gtk::MenuItem
-} SearchMenu;               // Search Menu
+    // GtkWidget *replace_mi;  // Gtk::MenuItem
+    GtkWidget *goto_mi; // Gtk::MenuItem
+} SearchMenu;           // Search Menu
 
 typedef struct
 {

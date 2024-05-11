@@ -330,9 +330,9 @@ void *create_edit_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaDat
     GtkWidget *paste_mi;
     GtkWidget *sep2;
     GtkWidget *comment_mi;
-    GtkWidget *uncomment_mi;
+    // GtkWidget *uncomment_mi;
     GtkWidget *sep3;
-    GtkWidget *insert_date_mi;
+    // GtkWidget *insert_date_mi;
 
     GtkWidget *accel_group = win_dep->accel_group;
 
@@ -351,10 +351,10 @@ void *create_edit_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaDat
     sep2 = gtk_separator_menu_item_new();
 
     comment_mi = gtk_menu_item_new_with_label("Comment");
-    uncomment_mi = gtk_menu_item_new_with_label("Uncomment");
+    // uncomment_mi = gtk_menu_item_new_with_label("Uncomment");
 
     sep3 = gtk_separator_menu_item_new();
-    insert_date_mi = gtk_menu_item_new_with_label("Insert Date/Time");
+    // insert_date_mi = gtk_menu_item_new_with_label("Insert Date/Time");
 
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit_mi), edit_menu);
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), undo_mi);
@@ -365,9 +365,9 @@ void *create_edit_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaDat
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), paste_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), sep2);
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), comment_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), uncomment_mi);
+    // gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), uncomment_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), sep3);
-    gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), insert_date_mi);
+    // gtk_menu_shell_append(GTK_MENU_SHELL(edit_menu), insert_date_mi);
 
     g_signal_connect(G_OBJECT(undo_mi), "activate", G_CALLBACK(undo_callback), meta_data);
     g_signal_connect(G_OBJECT(redo_mi), "activate", G_CALLBACK(redo_callback), meta_data);
@@ -375,8 +375,8 @@ void *create_edit_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaDat
     g_signal_connect(G_OBJECT(copy_mi), "activate", G_CALLBACK(copy_callback), meta_data);
     g_signal_connect(G_OBJECT(paste_mi), "activate", G_CALLBACK(paste_callback), meta_data);
     g_signal_connect(G_OBJECT(comment_mi), "activate", G_CALLBACK(comment_callback), meta_data);
-    g_signal_connect(G_OBJECT(uncomment_mi), "activate", G_CALLBACK(uncomment_callback), meta_data);
-    g_signal_connect(G_OBJECT(insert_date_mi), "activate", G_CALLBACK(insert_date_callback), meta_data);
+    // g_signal_connect(G_OBJECT(uncomment_mi), "activate", G_CALLBACK(uncomment_callback), meta_data);
+    // g_signal_connect(G_OBJECT(insert_date_mi), "activate", G_CALLBACK(insert_date_callback), meta_data);
 
     gtk_widget_add_accelerator(GTK_MENU_ITEM(undo_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_z, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
     gtk_widget_add_accelerator(GTK_MENU_ITEM(cut_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_x, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
@@ -393,9 +393,9 @@ void *create_edit_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaDat
     menubar_obj->edit_menu->paste_mi = paste_mi;
     menubar_obj->edit_menu->sep2 = sep2;
     menubar_obj->edit_menu->comment_mi = comment_mi;
-    menubar_obj->edit_menu->uncomment_mi = uncomment_mi;
+    // menubar_obj->edit_menu->uncomment_mi = uncomment_mi;
     menubar_obj->edit_menu->sep3 = sep3;
-    menubar_obj->edit_menu->insert_date_mi = insert_date_mi;
+    // menubar_obj->edit_menu->insert_date_mi = insert_date_mi;
 }
 
 void create_tab_width_menu(MetaData *meta_data, GtkWidget **twh_mi)
@@ -520,7 +520,7 @@ void *create_search_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaD
     GtkWidget *search_menu;
     GtkWidget *search_mi;
     GtkWidget *find_mi;
-    GtkWidget *replace_mi;
+    // GtkWidget *replace_mi;
     GtkWidget *goto_mi;
 
     GtkWidget *accel_group = win_dep->accel_group;
@@ -529,26 +529,26 @@ void *create_search_menu(WindowDependecies *win_dep, MenuBar *menubar_obj, MetaD
 
     search_mi = gtk_menu_item_new_with_mnemonic("_Search");
     find_mi = gtk_menu_item_new_with_label("Find");
-    replace_mi = gtk_menu_item_new_with_label("Replace");
+    // replace_mi = gtk_menu_item_new_with_label("Replace");
     goto_mi = gtk_menu_item_new_with_label("Go to line");
 
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(search_mi), search_menu);
     gtk_menu_shell_append(GTK_MENU_SHELL(search_menu), find_mi);
-    gtk_menu_shell_append(GTK_MENU_SHELL(search_menu), replace_mi);
+    // gtk_menu_shell_append(GTK_MENU_SHELL(search_menu), replace_mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(search_menu), goto_mi);
 
     g_signal_connect(G_OBJECT(find_mi), "activate", G_CALLBACK(find_callback), meta_data);
-    g_signal_connect(G_OBJECT(replace_mi), "activate", G_CALLBACK(replace_callback), meta_data);
+    // g_signal_connect(G_OBJECT(replace_mi), "activate", G_CALLBACK(replace_callback), meta_data);
     g_signal_connect(G_OBJECT(goto_mi), "activate", G_CALLBACK(goto_callback), meta_data);
 
     gtk_widget_add_accelerator(GTK_MENU_ITEM(find_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_f, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-    gtk_widget_add_accelerator(GTK_MENU_ITEM(replace_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_r, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+    // gtk_widget_add_accelerator(GTK_MENU_ITEM(replace_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_r, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
     gtk_widget_add_accelerator(GTK_MENU_ITEM(goto_mi), "activate", GTK_ACCEL_GROUP(accel_group), GDK_KEY_g, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
     menubar_obj->search_menu->search_menu = search_menu;
     menubar_obj->search_menu->search_mi = search_mi;
     menubar_obj->search_menu->find_mi = find_mi;
-    menubar_obj->search_menu->replace_mi = replace_mi;
+    // menubar_obj->search_menu->replace_mi = replace_mi;
     menubar_obj->search_menu->goto_mi = goto_mi;
 }
 
